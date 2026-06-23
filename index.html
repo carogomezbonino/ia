@@ -1,0 +1,2053 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IA</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Premium Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,850;1,400;1,600&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Space Grotesk', 'sans-serif'],
+            serif: ['Playfair Display', 'serif'],
+          },
+          colors: {
+            bgPrimary: '#FCFDFF',       // Pure editorial white background
+            bgSecondary: '#F8FAFC',     // Slate light background for panels
+            cardBg: '#FFFFFF',          // Crisp white container background
+            textDark: '#0F172A',        // Slate 900 for high-contrast typography
+            textMedium: '#334155',      // Slate 700 for highly readable body text
+            textLight: '#64748B',       // Slate 500 for secondary tags
+            accent: '#C23000',          // Active constructive terracotta
+            accentHover: '#9A2400',
+            emeraldCustom: '#047857',   // Deep emerald for checks
+            blueTheory: '#1D4ED8',      // Rich royal blue for diagrams
+            goldCustom: '#B45309',      // Deep amber for warning states
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    ::-webkit-scrollbar {
+      width: 12px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #F1F5F9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #CBD5E1;
+      border-radius: 6px;
+      border: 3px solid #F1F5F9;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #C23000;
+    }
+
+    /* Premium shadows and highlights */
+    .shadow-premium {
+      box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.05), 0 4px 12px -3px rgba(15, 23, 42, 0.03);
+    }
+    .shadow-glow {
+      box-shadow: 0 0 40px rgba(194, 48, 0, 0.04);
+    }
+    
+    html {
+      font-size: 19px; /* Enhanced baseline font size for readability */
+    }
+  </style>
+</head>
+<body class="bg-bgPrimary text-textDark font-sans antialiased overflow-x-hidden selection:bg-accent selection:text-white">
+
+  <!-- Top Scroll Progress bar -->
+  <div id="scroll-progress" class="fixed top-0 left-0 h-1.5 bg-gradient-to-r from-accent via-goldCustom to-blueTheory z-[2000] transition-all duration-75" style="width: 0%"></div>
+
+  <!-- Header Navigation -->
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-24 flex items-center justify-between">
+      <a href="#inicio" class="flex items-center gap-4">
+        <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-accent to-red-700 flex items-center justify-center text-white font-display font-bold text-2xl shadow-lg shadow-accent/20">
+          IA
+        </div>
+      </a>
+
+      <!-- Navigation links in user-requested order -->
+      <nav class="hidden lg:flex items-center gap-1">
+        <a href="#inicio" class="px-3.5 py-2 rounded-full text-sm font-bold uppercase tracking-wider text-textMedium hover:bg-slate-100 hover:text-textDark transition-all">Inicio</a>
+        <a href="#recorrido" class="px-3.5 py-2 rounded-full text-sm font-bold uppercase tracking-wider text-textMedium hover:bg-slate-100 hover:text-textDark transition-all">Recorrido</a>
+        <a href="#conceptos" class="px-3.5 py-2 rounded-full text-sm font-bold uppercase tracking-wider text-textMedium hover:bg-slate-100 hover:text-textDark transition-all">Conceptos</a>
+        <a href="#proceso" class="px-3.5 py-2 rounded-full text-sm font-bold uppercase tracking-wider text-textMedium hover:bg-slate-100 hover:text-textDark transition-all">Proceso</a>
+        <a href="#casos" class="px-3.5 py-2 rounded-full text-sm font-bold uppercase tracking-wider text-textMedium hover:bg-slate-100 hover:text-textDark transition-all">Casos</a>
+        <a href="#dilema" class="px-3.5 py-2 rounded-full text-sm font-bold uppercase tracking-wider text-textMedium hover:bg-slate-100 hover:text-textDark transition-all">Dilema</a>
+        <a href="#bingo" class="px-3.5 py-2 rounded-full text-sm font-bold uppercase tracking-wider text-textMedium hover:bg-slate-100 hover:text-textDark transition-all">Bingo</a>
+        <a href="#kit" class="px-3.5 py-2 rounded-full text-sm font-bold uppercase tracking-wider text-textMedium hover:bg-slate-100 hover:text-textDark transition-all">Kit</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <a href="#kit" class="hidden sm:inline-flex bg-accent hover:bg-accentHover text-white text-xs sm:text-sm font-bold uppercase tracking-widest px-6 py-3.5 rounded-full transition-all duration-300 transform hover:-translate-y-0.5 shadow-md">
+          Verificar Criterio
+        </a>
+        <button id="mobile-menu-btn" class="lg:hidden p-3 rounded-lg text-textMedium hover:text-textDark hover:bg-slate-100" aria-label="Toggle Menu">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="hidden lg:hidden bg-white border-b border-slate-200 px-4 pt-2 pb-6 flex flex-col gap-2">
+      <a href="#inicio" class="block px-4 py-3 rounded-lg text-base font-bold text-textMedium hover:bg-slate-50 hover:text-textDark">INICIO</a>
+      <a href="#recorrido" class="block px-4 py-3 rounded-lg text-base font-bold text-textMedium hover:bg-slate-50 hover:text-textDark">RECORRIDO</a>
+      <a href="#conceptos" class="block px-4 py-3 rounded-lg text-base font-bold text-textMedium hover:bg-slate-50 hover:text-textDark">CONCEPTOS</a>
+      <a href="#proceso" class="block px-4 py-3 rounded-lg text-base font-bold text-textMedium hover:bg-slate-50 hover:text-textDark">PROCESO</a>
+      <a href="#casos" class="block px-4 py-3 rounded-lg text-base font-bold text-textMedium hover:bg-slate-50 hover:text-textDark">CASOS</a>
+      <a href="#dilema" class="block px-4 py-3 rounded-lg text-base font-bold text-textMedium hover:bg-slate-50 hover:text-textDark">DILEMA</a>
+      <a href="#bingo" class="block px-4 py-3 rounded-lg text-base font-bold text-textMedium hover:bg-slate-50 hover:text-textDark">BINGO</a>
+      <a href="#kit" class="block px-4 py-3 rounded-lg text-base font-bold text-textMedium hover:bg-slate-50 hover:text-textDark">KIT</a>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section id="inicio" class="relative min-h-[90vh] flex items-center py-16 overflow-hidden bg-bgPrimary">
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(194,48,0,0.03),transparent_60%)] pointer-events-none"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_80%_80%,rgba(29,78,216,0.02),transparent_60%)] pointer-events-none"></div>
+    
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+      <div class="space-y-6 max-w-4xl mb-12">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-100 border border-slate-200 text-xs sm:text-sm font-bold uppercase tracking-widest text-accent">
+          TALLER
+        </div>
+        <h1 class="text-5xl sm:text-7xl lg:text-8xl font-display font-black tracking-tight text-textDark leading-[0.95]">
+          IA, criterio y <br>
+          <span class="text-accent italic font-serif font-light">responsabilidad</span>.
+        </h1>
+        <p class="text-xl sm:text-2xl text-textMedium max-w-3xl leading-relaxed">
+          Un espacio interactivo para proyectores, diseñadores e investigadores espaciales. Aprende a integrar ecosistemas complejos de inteligencia artificial sin delegar el juicio ético ni la firma técnica sobre el territorio físico.
+        </p>
+      </div>
+
+      <!-- MAIN PRESENTATION GRID: Exactly two main elements -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch pt-6">
+        
+        <!-- Element 1: "PROFE, USÉ IA" (Emotional & Critical trigger) -->
+        <div class="lg:col-span-7 bg-slate-50 border-2 border-slate-200 rounded-3xl p-8 sm:p-10 flex flex-col justify-between space-y-8 shadow-premium">
+          <div class="space-y-4">
+            <span class="text-xs font-mono font-bold uppercase tracking-widest text-accent">Toma de Posición Pedagógica</span>
+            <h2 class="text-3xl sm:text-4xl font-display font-bold text-textDark">«Profe, usé IA»</h2>
+            <p class="text-base sm:text-lg text-textMedium leading-relaxed">
+              La declaración que redefine los pactos de autoría en el taller de proyectos. La utilización del software no se castiga; se somete a auditoría de criterio. Selecciona uno de los estados académicos iniciales para explorar su deconstrucción técnica:
+            </p>
+          </div>
+
+          <!-- Conceptual triggers for reaction modals -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <button onclick="openModalByKey('miedo')" class="group text-left p-6 bg-white hover:bg-red-50 border-2 border-slate-200 hover:border-red-300 rounded-2xl transition-all shadow-sm">
+              <span class="block text-xs font-extrabold text-red-700 uppercase tracking-wider font-mono">ESTADO 1</span>
+              <strong class="block text-lg font-display font-bold text-textDark mt-1">Miedo</strong>
+              <span class="block text-sm text-textMedium mt-2 leading-relaxed">Temor al reemplazo operativo o la pérdida de relevancia intelectual del dibujante.</span>
+            </button>
+            
+            <button onclick="openModalByKey('bronca')" class="group text-left p-6 bg-white hover:bg-orange-50 border-2 border-slate-200 hover:border-orange-300 rounded-2xl transition-all shadow-sm">
+              <span class="block text-xs font-extrabold text-orange-700 uppercase tracking-wider font-mono">ESTADO 2</span>
+              <strong class="block text-lg font-display font-bold text-textDark mt-1">Bronca</strong>
+              <span class="block text-sm text-textMedium mt-2 leading-relaxed">Malestar docente o institucional ante la copia desmedida o la falta de esfuerzo crítico.</span>
+            </button>
+            
+            <button onclick="openModalByKey('curiosidad')" class="group text-left p-6 bg-white hover:bg-emerald-50 border-2 border-slate-200 hover:border-emerald-300 rounded-2xl transition-all shadow-sm">
+              <span class="block text-xs font-extrabold text-emerald-800 uppercase tracking-wider font-mono">ESTADO 3</span>
+              <strong class="block text-lg font-display font-bold text-textDark mt-1">Curiosidad</strong>
+              <span class="block text-sm text-textMedium mt-2 leading-relaxed">Integración exploratoria y sistemática de herramientas como andamiajes constructivos.</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Element 2: PUNTO DE PARTIDA (QR with Zoom interaction) -->
+        <div class="lg:col-span-5 bg-white border-2 border-slate-200 rounded-3xl p-8 sm:p-10 flex flex-col justify-between space-y-6 shadow-premium shadow-glow relative overflow-hidden">
+          <div class="space-y-3">
+            <span class="text-xs font-mono font-bold uppercase tracking-widest text-accent">Momento Práctico 01</span>
+            <h2 class="text-3xl font-display font-bold text-textDark">Punto de Partida</h2>
+            <p class="text-sm sm:text-base text-textMedium leading-relaxed">
+              Inicia el diagnóstico grupal. Escanea el código QR de acceso para participar en directo de las consultas e hipótesis colectivas del taller.
+            </p>
+          </div>
+
+          <!-- Interactive QR Zone -->
+          <div onclick="openQrModal()" class="p-6 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-2xl flex flex-col items-center justify-center gap-4 transition-all cursor-zoom-in group">
+            <div class="w-48 h-48 bg-white p-3 rounded-xl flex items-center justify-center shadow-md relative overflow-hidden">
+              <img src="WhatsApp Image 2026-06-23 at 05.52.30.jpeg" alt="Código QR de Acceso al Taller" class="w-full h-full object-contain" onerror="this.src='https://placehold.co/200x200/FFFFFF/C23000?text=QR+TALLER'"/>
+              <div class="absolute inset-0 bg-accent/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                <span class="bg-white text-accent font-extrabold px-3 py-1.5 rounded-lg text-xs tracking-wider uppercase border border-accent/20">Ampliar Código</span>
+              </div>
+            </div>
+            <div class="text-center">
+              <span class="inline-block px-3 py-0.5 rounded bg-accent/10 text-xs font-bold uppercase tracking-wider text-accent mb-1">Click para Zoom</span>
+              <p class="text-sm font-medium text-textDark">Agrandar para pantalla de proyección</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- RECORRIDO TEMPORAL -->
+  <section id="recorrido" class="py-24 bg-white border-y border-slate-200 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-16">
+        <div>
+          <span class="text-xs sm:text-sm font-extrabold uppercase tracking-widest text-accent font-display block mb-2">Sección 02</span>
+          <h2 class="text-4xl sm:text-5xl font-display font-bold tracking-tight text-textDark leading-tight">
+            Cinco bloques, <br class="hidden sm:inline">
+            un <span class="italic font-serif font-light text-accent">itinerario</span> secuencial.
+          </h2>
+        </div>
+        <p class="max-w-md text-textMedium text-base sm:text-lg leading-relaxed">
+          Plan temporal estructurado para el desarrollo del taller. Una dosificación conceptual para transitar del diagnóstico inicial al compromiso ético final.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+        
+        <div class="bg-bgSecondary border-t-4 border-accent p-8 rounded-2xl relative space-y-4 shadow-sm">
+          <div class="text-4xl sm:text-5xl font-display font-black text-accent/20">01</div>
+          <div>
+            <span class="text-xs uppercase font-mono tracking-wider text-accent font-extrabold">Minutos 0 - 20</span>
+            <h3 class="text-lg sm:text-xl font-bold text-textDark mt-1">Diagnóstico Inicial</h3>
+          </div>
+          <p class="text-sm sm:text-base text-textMedium leading-relaxed">
+            Escaneo del código QR. Puesta en común del termómetro inicial sobre miedos y confianzas técnicas.
+          </p>
+        </div>
+
+        <div class="bg-bgSecondary border-t-4 border-blueTheory p-8 rounded-2xl relative space-y-4 shadow-sm">
+          <div class="text-4xl sm:text-5xl font-display font-black text-blueTheory/20">02</div>
+          <div>
+            <span class="text-xs uppercase font-mono tracking-wider text-blueTheory font-extrabold">Minutos 20 - 50</span>
+            <h3 class="text-lg sm:text-xl font-bold text-textDark mt-1">Fundamentos Críticos</h3>
+          </div>
+          <p class="text-sm sm:text-base text-textMedium leading-relaxed">
+            Examen de la ilusión de transparencia de la interfaz, el verosímil lingüístico y la alucinación técnica.
+          </p>
+        </div>
+
+        <div class="bg-bgSecondary border-t-4 border-goldCustom p-8 rounded-2xl relative space-y-4 shadow-sm">
+          <div class="text-4xl sm:text-5xl font-display font-black text-goldCustom/20">03</div>
+          <div>
+            <span class="text-xs uppercase font-mono tracking-wider text-goldCustom font-extrabold">Minutos 50 - 80</span>
+            <h3 class="text-lg sm:text-xl font-bold text-textDark mt-1">Ecosistema en Acción</h3>
+          </div>
+          <p class="text-sm sm:text-base text-textMedium leading-relaxed">
+            Interacción cruzada y simulación en tiempo real: Perplexity, NotebookLM y Gemini en el aula.
+          </p>
+        </div>
+
+        <div class="bg-bgSecondary border-t-4 border-emeraldCustom p-8 rounded-2xl relative space-y-4 shadow-sm">
+          <div class="text-4xl sm:text-5xl font-display font-black text-emeraldCustom/20">04</div>
+          <div>
+            <span class="text-xs uppercase font-mono tracking-wider text-emeraldCustom font-extrabold">Minutos 80 - 110</span>
+            <h3 class="text-lg sm:text-xl font-bold text-textDark mt-1">Casos Situados</h3>
+          </div>
+          <p class="text-sm sm:text-base text-textMedium leading-relaxed">
+            Trabajo práctico grupal de resolución crítica de proyectos de diseño usando el método «Voy, Vengo, Itero».
+          </p>
+        </div>
+
+        <div class="bg-bgSecondary border-t-4 border-slate-700 p-8 rounded-2xl relative space-y-4 shadow-sm">
+          <div class="text-4xl sm:text-5xl font-display font-black text-slate-700/20">05</div>
+          <div>
+            <span class="text-xs uppercase font-mono tracking-wider text-slate-700 font-extrabold">Minutos 110 - 120</span>
+            <h3 class="text-lg sm:text-xl font-bold text-textDark mt-1">Síntesis y Compromiso</h3>
+          </div>
+          <p class="text-sm sm:text-base text-textMedium leading-relaxed">
+            Puesta en común del bingo de vigilancia, redacción de la bitácora ética de compromiso individual.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CONCEPTOS: OCHO EJES PARA CONOCER LA IA -->
+  <section id="conceptos" class="py-24 bg-bgPrimary relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-16">
+        <div>
+          <span class="text-xs sm:text-sm font-extrabold uppercase tracking-widest text-accent font-display block mb-2">Sección 03</span>
+          <h2 class="text-4xl sm:text-5xl font-display font-bold tracking-tight text-textDark leading-tight">
+            Ocho ejes para <span class="italic font-serif font-light text-accent">conocer la IA</span>
+          </h2>
+        </div>
+        <p class="max-w-md text-textMedium text-base sm:text-lg leading-relaxed">
+          Explora los límites, riesgos técnicos y potencialidades metodológicas de los modelos generativos. Haz clic en las tarjetas para desplegar la información teórica y los prompts de auditoría.
+        </p>
+      </div>
+
+      <!-- Grid of 8 axes, rendering dynamically -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" id="axes-grid">
+        <!-- Rendered dynamically by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESO: CASO DE ESTUDIO BIBLIOTECA COMUNITARIA -->
+  <section id="proceso" class="py-24 bg-white border-y border-slate-200 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-12 items-end">
+        <div class="lg:col-span-8">
+          <span class="text-xs sm:text-sm font-extrabold uppercase tracking-widest text-accent font-display block mb-2">Sección 04</span>
+          <h2 class="text-4xl sm:text-5xl font-display font-bold tracking-tight text-textDark leading-tight">
+            El Ecosistema IA <br class="hidden sm:inline">
+            Paso a Paso en <span class="text-accent italic font-serif">Arquitectura</span>.
+          </h2>
+          <p class="text-textMedium text-base sm:text-lg mt-3 max-w-3xl leading-relaxed">
+            Caso Práctico: <span class="text-textDark font-bold">Diseñar una Biblioteca Comunitaria en un barrio periférico de Mendoza</span>. Explora cómo interactúan tres herramientas (Perplexity, NotebookLM y Gemini) para alimentar las etapas del proyecto espacial sin devaluar la autoría ni delegar el criterio.
+          </p>
+        </div>
+        <div class="lg:col-span-4 lg:text-right">
+          <span class="inline-block px-4 py-2 bg-accent/10 border border-accent/20 rounded-xl text-xs sm:text-sm font-extrabold text-accent uppercase tracking-widest font-mono">
+            Caso: B° Periférico Mendoza
+          </span>
+        </div>
+      </div>
+
+      <!-- Stepper Navigation tabs -->
+      <div class="flex items-center gap-3 overflow-x-auto pb-4 mb-8 border-b border-slate-200" id="stepper-nav" role="tablist">
+        <!-- Rendered dynamically by JS -->
+      </div>
+
+      <!-- Stepper Content Card -->
+      <div class="bg-bgSecondary border border-slate-300 rounded-3xl p-8 sm:p-12 shadow-premium relative overflow-hidden" id="stepper-content">
+        <!-- Rendered dynamically by JS -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CASOS PRÁCTICOS DE ARQUITECTURA -->
+  <section id="casos" class="py-24 bg-bgPrimary relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-16">
+        <div>
+          <span class="text-xs sm:text-sm font-extrabold uppercase tracking-widest text-accent font-display block mb-2">Sección 05</span>
+          <h2 class="text-4xl sm:text-5xl font-display font-bold tracking-tight text-textDark leading-tight">
+            Práctica Situada: <br class="hidden sm:inline">
+            Ciclo <span class="text-accent italic font-serif">Voy · Vengo · Itero</span>.
+          </h2>
+        </div>
+
+        <!-- Cases select tabs controls -->
+        <div class="flex flex-wrap gap-2 bg-slate-200/60 border border-slate-300 p-2 rounded-full" id="cases-tabs" role="tablist">
+          <!-- Rendered dynamically by JS -->
+        </div>
+      </div>
+
+      <!-- Active Case Dashboard Display -->
+      <div id="cases-content" class="bg-white border border-slate-200 rounded-3xl p-8 sm:p-12 shadow-premium">
+        <!-- Rendered dynamically by JS -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- DILEMA ESTRUCTURAL -->
+  <section id="dilema" class="py-24 bg-white border-y border-slate-200 relative">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-xs sm:text-sm font-extrabold uppercase tracking-widest text-accent font-display block mb-2">Sección 06</span>
+        <h2 class="text-4xl sm:text-5xl font-display font-bold text-textDark">El Dilema Estructural</h2>
+        <p class="text-textMedium text-base sm:text-lg mt-3 leading-relaxed">
+          Un debate ético y legal indispensable sobre la delegación ciega del cálculo técnico y las variables físicas en zonas sísmicas extremas.
+        </p>
+      </div>
+
+      <div class="bg-bgSecondary border border-slate-300 rounded-3xl p-8 sm:p-12 space-y-8 relative overflow-hidden shadow-premium">
+        
+        <div class="space-y-4">
+          <div class="inline-flex items-center gap-2 text-xs sm:text-sm font-extrabold text-accent uppercase tracking-widest font-mono">
+            Caso Simulado: Viento Zonda y Fachada
+          </div>
+          <h3 class="text-3xl font-display font-bold text-textDark">El Colapso de la Fachada Autoportante</h3>
+          <p class="text-textMedium text-base sm:text-lg leading-relaxed">
+            Un estudio utiliza un software con IA para optimizar la estructura de soporte de una fachada ventilada en una obra pública en Mendoza. El sistema automatizado calcula que reduciendo las secciones metálicas un 18% se optimiza el costo final de los materiales. El plano es impreso y firmado. Durante un evento severo de viento Zonda, las ráfagas superan las tolerancias simuladas, provocando el desprendimiento y la caída de tres paneles de piedra a la vía pública. El estudio sostiene ante el juzgado civil: 
+            <span class="italic text-accent font-semibold">"Confiamos de buena fe en los coeficientes y simulaciones matemáticas de la plataforma."</span>
+          </p>
+        </div>
+
+        <div class="space-y-6 border-t border-slate-300 pt-8">
+          <h4 class="text-base font-extrabold uppercase text-textDark tracking-wider">¿Quién es el único responsable legal, civil y ético del colapso estructural?</h4>
+          
+          <!-- Highlighted, extremely prominent card choices -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-6" id="dilemma-options-container">
+            <button onclick="checkDilemmaAnswer('estudio', this)" class="text-left p-6 rounded-2xl border-4 border-slate-200 hover:border-accent bg-white transition-all text-base flex flex-col justify-between min-h-[160px] shadow-sm transform hover:-translate-y-1">
+              <span class="font-black text-accent uppercase block mb-1 text-sm tracking-widest font-mono">ESTUDIO DE ARQUITECTURA</span>
+              <span class="text-textMedium leading-snug font-medium">El profesional firmante que estampa su sello y asume la dirección técnica de la obra física.</span>
+              <span class="icon-indicator mt-3 font-extrabold text-accent text-sm"></span>
+            </button>
+            
+            <button onclick="checkDilemmaAnswer('desarrollador', this)" class="text-left p-6 rounded-2xl border-4 border-slate-200 hover:border-blueTheory bg-white transition-all text-base flex flex-col justify-between min-h-[160px] shadow-sm transform hover:-translate-y-1">
+              <span class="font-black text-blueTheory uppercase block mb-1 text-sm tracking-widest font-mono">DESARROLLADORES DE IA</span>
+              <span class="text-textMedium leading-snug font-medium">La corporación que provee la red neuronal y los servicios de cálculo computacional.</span>
+              <span class="icon-indicator mt-3 font-extrabold text-blueTheory text-sm"></span>
+            </button>
+            
+            <button onclick="checkDilemmaAnswer('inspector', this)" class="text-left p-6 rounded-2xl border-4 border-slate-200 hover:border-goldCustom bg-white transition-all text-base flex flex-col justify-between min-h-[160px] shadow-sm transform hover:-translate-y-1">
+              <span class="font-black text-goldCustom uppercase block mb-1 text-sm tracking-widest font-mono">INSPECCIÓN MUNICIPAL</span>
+              <span class="text-textMedium leading-snug font-medium">La oficina técnica del municipio que emite la aprobación documental final del edificio.</span>
+              <span class="icon-indicator mt-3 font-extrabold text-goldCustom text-sm"></span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Feedback alert panel -->
+        <div id="dilemma-feedback" class="hidden p-6 rounded-xl border-2 transition-all text-base leading-relaxed font-semibold">
+          <!-- Loaded dynamically -->
+        </div>
+
+        <!-- Professional rationale input area -->
+        <div class="space-y-3 pt-6 border-t border-slate-300">
+          <label class="block text-base font-bold uppercase text-textDark tracking-wider font-mono" for="dilemma-reasoning">Justificación de la Matrícula e Independencia Profesional:</label>
+          <textarea id="dilemma-reasoning" class="w-full bg-white border-2 border-slate-300 rounded-xl p-5 text-base text-textDark focus:outline-none focus:border-accent min-h-[140px] shadow-sm" placeholder="Define tus argumentos: ¿Por qué la matrícula civil e intelectual te impide alegar ignorancia algorítmica sobre un fallo estructural?"></textarea>
+          <div class="flex justify-between items-center flex-wrap gap-4 pt-2">
+            <button onclick="saveDilemmaText()" class="px-6 py-3.5 rounded-full bg-accent hover:bg-accentHover text-white text-xs sm:text-sm font-bold uppercase tracking-wider transition-all shadow-md">
+              Registrar en Bitácora
+            </button>
+            <span id="dilemma-status" class="text-sm font-mono font-bold text-emeraldCustom"></span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- BINGO DE LA VIGILANCIA PROFESIONAL -->
+  <section id="bingo" class="py-24 bg-bgPrimary relative">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <span class="text-xs sm:text-sm font-extrabold uppercase tracking-widest text-accent font-display block mb-2">Sección 07</span>
+        <h2 class="text-4xl sm:text-5xl font-display font-bold text-textDark">Bingo de la Vigilancia Profesional</h2>
+        <p class="text-textMedium text-base sm:text-lg mt-3 leading-relaxed">
+          Un marco autoevaluativo interactivo. Marca los hábitos reflexivos y comprobaciones reales aplicadas durante tus flujos de trabajo e interacciones lúdicas con las plataformas generativas.
+        </p>
+        <p class="text-base sm:text-lg text-accent font-mono font-extrabold mt-4 bg-accent/5 inline-block px-5 py-2 rounded-full border border-accent/10" id="bingo-stats">
+          Marcadores activos: 0 / 15
+        </p>
+      </div>
+
+      <div class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-10 shadow-premium relative overflow-hidden">
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4" id="bingo-grid">
+          <!-- Rendered dynamically by JS -->
+        </div>
+
+        <!-- Winning Overlay Screen inside container -->
+        <div id="bingo-overlay-win" class="hidden absolute inset-0 bg-white/95 backdrop-blur-md rounded-3xl flex flex-col items-center justify-center p-8 text-center transition-all duration-300 z-30 border-4 border-emeraldCustom">
+          <span class="text-4xl font-extrabold text-emeraldCustom uppercase tracking-widest font-display">COMPLETADO</span>
+          <h3 class="text-3xl sm:text-4xl font-display font-bold text-textDark mt-4">¡Rigor Metodológico Comprobado!</h3>
+          <p class="text-base sm:text-lg text-textMedium max-w-lg mt-2 leading-relaxed">
+            Has mantenido activa la sospecha crítica y el control epistemológico del proyecto, aunando la dependencia intelectual ciega del ecosistema predictivo.
+          </p>
+          <button onclick="resetBingoGrid()" class="mt-6 px-6 py-3.5 rounded-full bg-emeraldCustom text-white font-bold uppercase tracking-wider text-xs sm:text-sm hover:bg-emerald-800 transition-all shadow-md">
+            Reiniciar Marcadores
+          </button>
+        </div>
+      </div>
+
+      <div class="flex justify-center mt-6">
+        <button onclick="resetBingoGrid()" class="px-5 py-2.5 rounded-full border-2 border-slate-300 hover:bg-slate-100 text-xs sm:text-sm font-bold text-textMedium uppercase tracking-wider transition-all">
+          Limpiar Marcadores
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- KIT DE HERRAMIENTAS USADAS -->
+  <section id="kit" class="py-24 bg-white border-t border-slate-200 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-24">
+      
+      <!-- Recommended Tools Grid (Polished Drawer Cards) -->
+      <div>
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-12">
+          <div>
+            <span class="text-xs sm:text-sm font-extrabold uppercase tracking-widest text-accent font-display block mb-2">Sección 08</span>
+            <h2 class="text-4xl sm:text-5xl font-display font-bold text-textDark">Kit de Herramientas Usadas</h2>
+            <p class="text-textMedium text-base sm:text-lg mt-2 max-w-2xl leading-relaxed">
+              Consiste en ordenar y cruzar múltiples plataformas para armar un ecosistema dinámico y balanceado de auditoría constructiva y conceptual.
+            </p>
+          </div>
+        </div>
+
+        <!-- Stable Drawer-based Tools Container (Fixes all 3D backface mirror issues) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="tools-flip-grid">
+          <!-- Rendered dynamically by JS -->
+        </div>
+      </div>
+
+      <!-- Student vs Professional Dual Checklist Section -->
+      <div class="bg-bgSecondary border border-slate-300 rounded-3xl p-8 sm:p-12 space-y-8 shadow-premium">
+        <div class="max-w-3xl">
+          <span class="inline-flex items-center gap-2 px-3 py-1 bg-accent/10 border border-accent/20 rounded-full text-xs font-bold text-accent uppercase tracking-wider font-mono mb-2">Propuestas de Ideas Orientativas</span>
+          <h3 class="text-3xl font-display font-bold text-textDark">Checklists de Verificación Crítica</h3>
+          <p class="text-textMedium text-base sm:text-lg mt-2 leading-relaxed">
+            Selecciona tu perfil para auditar tus hábitos y metodologías de diseño. Estos listados sirven como ideas guía de control para mantener activa la sospecha y la soberanía del proyecto.
+          </p>
+        </div>
+
+        <!-- Dual Selector Tabs -->
+        <div class="flex gap-3 border-b border-slate-300 pb-2">
+          <button id="tab-chk-estudiante" onclick="switchChecklistType('student')" class="px-5 py-3 rounded-t-xl text-sm font-bold uppercase tracking-wider transition-all border-b-4 border-accent text-accent">
+            Estudiante Universitario
+          </button>
+          <button id="tab-chk-profesional" onclick="switchChecklistType('pro')" class="px-5 py-3 rounded-t-xl text-sm font-bold uppercase tracking-wider text-textLight hover:text-textDark transition-all border-b-4 border-transparent">
+            Profesional Matriculado
+          </button>
+        </div>
+
+        <!-- Custom Progress Tracker bar -->
+        <div class="space-y-3">
+          <div class="flex justify-between items-center text-xs sm:text-sm font-mono font-bold text-textMedium">
+            <span id="checklist-label-indicator">Grado de Auditoría Crítica</span>
+            <span id="checklist-text-indicator" class="text-accent">0 / 8 puntos validados</span>
+          </div>
+          <div class="h-3.5 w-full bg-slate-200 rounded-full overflow-hidden">
+            <div id="checklist-progress" class="h-full bg-gradient-to-r from-accent to-emeraldCustom w-0 transition-all duration-500"></div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="checklist-grid-container">
+          <!-- Generated dynamically by JS based on selected tab -->
+        </div>
+      </div>
+
+      <!-- Bitacora / Personal Reflection Hub with Interactive Commitments -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        
+        <div class="lg:col-span-5 space-y-6">
+          <div class="space-y-2">
+            <span class="text-xs font-mono font-bold text-accent uppercase tracking-widest">Acta del Taller</span>
+            <h3 class="text-3xl font-display font-bold text-textDark">Ideario de Compromisos</h3>
+            <p class="text-textMedium text-base sm:text-lg leading-relaxed">
+              En lugar de escribir desde cero, selecciona de forma interactiva las responsabilidades éticas y técnicas que asumes hoy para tus próximos proyectos espaciales. Haz clic para agregarlas a tu bitácora personal.
+            </p>
+          </div>
+
+          <!-- Dynamic Commitment Selector Buttons -->
+          <div class="space-y-3" id="commitment-selectors-container">
+            <!-- Rendered dynamically by JS -->
+          </div>
+        </div>
+
+        <div class="lg:col-span-7 bg-bgSecondary border border-slate-300 rounded-3xl p-8 sm:p-10 space-y-5 shadow-premium">
+          <label for="personal-bitacora-text" class="block text-xs sm:text-sm font-extrabold uppercase tracking-widest text-textDark font-mono">Mi Declaración de Autenticidad, Limitaciones e Integración de Criterios:</label>
+          <textarea id="personal-bitacora-text" class="w-full bg-white border-2 border-slate-300 rounded-xl p-5 text-base text-textDark focus:outline-none focus:border-accent min-h-[260px] shadow-sm font-medium" placeholder="Haz clic en los compromisos de la izquierda para poblar tu bitácora de taller, y luego personaliza o escribe tus propias reflexiones aquí..."></textarea>
+          
+          <div class="flex justify-between items-center flex-wrap gap-4">
+            <div class="flex gap-2">
+              <button onclick="saveNotesToLocal()" class="px-6 py-3.5 rounded-full bg-accent hover:bg-accentHover text-white text-xs sm:text-sm font-bold uppercase tracking-wider transition-all shadow-md">
+                Guardar Notas
+              </button>
+              <button onclick="clearNotesFromLocal()" class="px-5 py-3.5 rounded-full border border-slate-300 hover:bg-slate-200 text-xs sm:text-sm text-textMedium hover:text-textDark transition-all">
+                Restablecer Bitácora
+              </button>
+            </div>
+            <span id="bitacora-save-status" class="text-sm font-mono font-bold text-emeraldCustom"></span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-slate-900 text-slate-300 py-16 text-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-12">
+        
+        <div class="md:col-span-6 space-y-4">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-lg bg-accent flex items-center justify-center text-white font-display font-bold text-lg">
+              IA
+            </div>
+            <span class="font-display font-bold text-base text-white tracking-widest uppercase">Criterio & Responsabilidad</span>
+          </div>
+          <p class="max-w-md leading-relaxed text-slate-300 text-base">
+            Un marco epistemológico y de auditoría crítica diseñado para los talleres de arquitectura, urbanismo y ciencias aplicadas en el territorio mendocino.
+          </p>
+        </div>
+
+        <div class="md:col-span-3 space-y-3">
+          <h4 class="text-white uppercase tracking-wider font-bold text-sm">Secciones</h4>
+          <ul class="space-y-2 text-base">
+            <li><a href="#inicio" class="hover:text-accent transition-colors">Inicio y QR</a></li>
+            <li><a href="#recorrido" class="hover:text-accent transition-colors">Recorrido Temporal</a></li>
+            <li><a href="#conceptos" class="hover:text-accent transition-colors">8 Ejes de Conocimiento</a></li>
+            <li><a href="#proceso" class="hover:text-accent transition-colors">Ecosistema Mendoza</a></li>
+          </ul>
+        </div>
+
+        <div class="md:col-span-3 space-y-3">
+          <h4 class="text-white uppercase tracking-wider font-bold text-sm">Herramientas</h4>
+          <ul class="space-y-2 text-base">
+            <li><a href="https://www.perplexity.ai" target="_blank" class="hover:text-accent transition-colors">Perplexity AI [Sitio Externo]</a></li>
+            <li><a href="https://notebooklm.google" target="_blank" class="hover:text-accent transition-colors">Google NotebookLM [Sitio Externo]</a></li>
+            <li><a href="https://gemini.google.com" target="_blank" class="hover:text-accent transition-colors">Gemini Workspace [Sitio Externo]</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="border-t border-slate-800 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-base">
+        <p>© 2026 Cátedra de Epistemología y Proyecto Integrador de Mendoza.</p>
+        <p class="font-display text-white tracking-widest uppercase">El juicio técnico es soberano e indelegable.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WIDER DETAIL AXES MODAL -->
+  <div id="axes-modal" class="hidden fixed inset-0 bg-slate-900/80 backdrop-blur-md z-[1000] flex items-center justify-center p-4 animate-fade-in" onclick="closeAxesModal()">
+    <div class="bg-white border-2 border-slate-300 rounded-3xl w-full max-w-4xl max-h-[85vh] overflow-y-auto shadow-2xl relative" onclick="event.stopPropagation()">
+      <button onclick="closeAxesModal()" class="absolute top-6 right-6 w-12 h-12 rounded-full bg-slate-100 border-2 border-slate-300 flex items-center justify-center text-textDark hover:bg-accent hover:text-white hover:border-accent transition-all duration-300 text-lg font-bold shadow-sm">
+        ✕
+      </button>
+
+      <!-- Modal Header -->
+      <div class="p-8 border-b border-slate-200 bg-slate-50">
+        <span id="modal-axis-number" class="text-xs sm:text-sm font-mono text-accent uppercase font-extrabold tracking-widest block mb-1">EJE</span>
+        <h3 id="modal-axis-title" class="text-2xl sm:text-4.5xl font-display font-bold text-textDark leading-tight">Cargando Eje...</h3>
+      </div>
+
+      <!-- Modal Body (Optimized for double columns and clear reading) -->
+      <div class="p-8 space-y-6 text-base sm:text-lg text-textMedium" id="modal-axis-body">
+        <!-- Loaded dynamically via JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- QR IMAGE ZOOM MODAL -->
+  <div id="qr-modal" class="hidden fixed inset-0 bg-slate-900/90 backdrop-blur-lg z-[2000] flex flex-col items-center justify-center p-4" onclick="closeQrModal()">
+    <button onclick="closeQrModal()" class="absolute top-6 right-6 px-6 py-3 rounded-full bg-white text-textDark font-bold hover:bg-accent hover:text-white transition-all text-sm uppercase tracking-wider shadow-md">
+      Cerrar Zoom
+    </button>
+    <div class="bg-white p-8 sm:p-12 rounded-3xl shadow-2xl max-w-lg w-full text-center space-y-6" onclick="event.stopPropagation()">
+      <div class="bg-white p-4 rounded-2xl border-2 border-slate-100 flex items-center justify-center shadow-lg">
+        <img src="WhatsApp Image 2026-06-23 at 05.52.30.jpeg" alt="Código QR en pantalla gigante" class="w-full h-auto max-h-[55vh] object-contain" onerror="this.src='https://placehold.co/400x400/FFFFFF/C23000?text=QR+TALLER'"/>
+      </div>
+      <div class="space-y-2">
+        <h4 class="text-xl font-display font-bold text-textDark">Votación y Debate Inicial</h4>
+        <p class="text-sm text-textMedium">Apunta la cámara de tu teléfono móvil sobre el código QR para ingresar de inmediato al diagnóstico grupal de hilos y posturas técnicas.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FLOATING TOAST SYSTEM -->
+  <div id="toast" class="fixed bottom-6 right-6 z-[2000] transform translate-y-24 opacity-0 bg-accent text-white font-bold text-sm uppercase tracking-widest px-6 py-4 rounded-xl shadow-2xl transition-all duration-300 flex items-center gap-2">
+    <span id="toast-icon">✓</span>
+    <span id="toast-message">Copiado con éxito</span>
+  </div>
+
+  <script>
+    // Comprehensive Conceptual Data for the 8 Axes
+    const CONCEPTOS = [
+      {
+        num: "01",
+        title: "La Caja Negra",
+        summary: "Análisis pormenorizado de las tres capas invisibles (estadística predictiva, sesgo de representación geográfica y estética del render) que definen el comportamiento de una respuesta algorítmica.",
+        body: `
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div class="space-y-4">
+              <h4 class="text-lg font-bold text-textDark uppercase tracking-wider font-mono border-b pb-2">Las Tres Capas Ocultas</h4>
+              <p class="text-textMedium text-base sm:text-lg leading-relaxed">
+                Cuando una interfaz conversacional entrega un resultado de diseño, este no emerge de una comprensión constructiva del objeto. Las plataformas operan bajo una triple opacidad que el proyectista debe desglosar activamente:
+              </p>
+              <ul class="space-y-2 text-sm sm:text-base text-textMedium">
+                <li><strong class="text-accent">1. Estadística sin Semántica:</strong> La red neuronal asocia caracteres en base a probabilidad matemática, no física. Ignora de base los límites del material y las lógicas climáticas locales.</li>
+                <li><strong class="text-blueTheory">2. Infraestructura y Sesgo de Datos:</strong> El 90% del corpus de entrenamiento responde a contextos del hemisferio norte metropolitano.</li>
+                <li><strong class="text-emeraldCustom">3. La Estética del Render Globalizado:</strong> Estereotipos formales (muros de vidrio y hormigón expuesto) que ignoran recursos y tradiciones constructivas nativas de la región árida de Mendoza.</li>
+              </ul>
+              <p class="text-textMedium text-base sm:text-lg leading-relaxed">
+                <strong class="text-textDark font-bold">Implicancia Territorial:</strong> Diseñar bajo estos sesgos desatiende la sismorresistencia del medio mendocino (Zona Sísmica 4) y la violenta radiación solar que exige inercia térmica real y no mero maquillaje vidriado.
+              </p>
+            </div>
+            
+            <div class="space-y-6 flex flex-col justify-between">
+              <!-- Visual Diagram (No Emojis, Pure SVG) -->
+              <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl">
+                <span class="block text-xs uppercase font-bold text-textLight tracking-wider font-mono mb-2">Esquema: Las 3 Capas de la Opacidad</span>
+                <svg viewBox="0 0 400 130" class="w-full h-auto">
+                  <g fill="none" stroke-width="1.5">
+                    <!-- Layer 1 -->
+                    <rect x="10" y="10" width="100" height="110" rx="6" fill="#F1F5F9" stroke="#94A3B8"/>
+                    <text x="60" y="40" font-family="Space Grotesk" font-size="10" font-weight="bold" fill="#0F172A" text-anchor="middle">Capas Probabilísticas</text>
+                    <text x="60" y="70" font-family="Inter" font-size="8" fill="#475569" text-anchor="middle">Asociación de Palabras</text>
+                    <text x="60" y="90" font-family="Inter" font-size="8" fill="#475569" text-anchor="middle">Sin Criterio Físico</text>
+                    
+                    <path d="M110 65 L140 65" stroke="#C23000" stroke-width="2" marker-end="url(#arrow-head)"/>
+                    
+                    <!-- Layer 2 -->
+                    <rect x="150" y="10" width="100" height="110" rx="6" fill="#EFF6FF" stroke="#3B82F6"/>
+                    <text x="200" y="40" font-family="Space Grotesk" font-size="10" font-weight="bold" fill="#1D4ED8" text-anchor="middle">Sesgo de Corpus</text>
+                    <text x="200" y="70" font-family="Inter" font-size="8" fill="#1E40AF" text-anchor="middle">Eurocéntrico / Global</text>
+                    <text x="200" y="90" font-family="Inter" font-size="8" fill="#1E40AF" text-anchor="middle">Desconoce Mendoza</text>
+                    
+                    <path d="M250 65 L280 65" stroke="#C23000" stroke-width="2" marker-end="url(#arrow-head)"/>
+
+                    <!-- Layer 3 -->
+                    <rect x="290" y="10" width="100" height="110" rx="6" fill="#FEF2F2" stroke="#EF4444"/>
+                    <text x="340" y="40" font-family="Space Grotesk" font-size="10" font-weight="bold" fill="#B91C1C" text-anchor="middle">Estética Homogénea</text>
+                    <text x="340" y="70" font-family="Inter" font-size="8" fill="#991B1B" text-anchor="middle">La Ficción del Render</text>
+                    <text x="340" y="90" font-family="Inter" font-size="8" fill="#991B1B" text-anchor="middle">Vidrio en el Desierto</text>
+                  </g>
+                  <defs>
+                    <marker id="arrow-head" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                      <path d="M 0 0 L 10 5 L 0 10 z" fill="#C23000"/>
+                    </marker>
+                  </defs>
+                </svg>
+              </div>
+
+              <div class="bg-slate-50 p-6 rounded-2xl border-2 border-slate-200 space-y-4">
+                <div>
+                  <span class="block text-xs uppercase font-bold text-accent tracking-wider font-mono">Consigna de Auditoría Crítica</span>
+                  <p class="italic text-textDark text-base mt-2 leading-relaxed">
+                    Obliga al modelo a desarmar el contenido técnico asumiendo que contiene fallas climáticas locales. No tomes la respuesta inicial como un dato consolidado.
+                  </p>
+                </div>
+                <div class="space-y-2">
+                  <span class="block text-xs uppercase font-bold text-textLight tracking-wider">Prompt de Control Técnico:</span>
+                  <div class="bg-white border border-slate-300 rounded-xl p-4 font-mono text-sm text-accent relative">
+                    <code id="prompt-p1">"Actúa como un auditor estructural e identifica 3 posibles fallas de contexto físico mendocino (sísmico, amplitud térmica y viento Zonda) en la siguiente propuesta: [PEGAR RESPUESTA DE IA]"</code>
+                    <button onclick="copyPromptText('prompt-p1')" class="absolute top-3 right-3 px-3 py-1 bg-slate-100 hover:bg-accent hover:text-white border border-slate-300 text-textDark font-sans text-xs rounded uppercase font-bold transition-all shadow-sm">Copiar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        `
+      },
+      {
+        num: "02",
+        title: "Verosímil vs. Veraz",
+        summary: "La diferencia fundamental entre lo formalmente creíble/coherente y lo estrictamente verdadero. Análisis del fenómeno de las alucinaciones.",
+        body: `
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div class="space-y-4">
+              <h4 class="text-lg font-bold text-textDark uppercase tracking-wider font-mono border-b pb-2">La Ilusión de Coherencia</h4>
+              <p class="text-textMedium text-base sm:text-lg leading-relaxed">
+                La verosimilitud es una propiedad de la estructura del lenguaje: un texto se siente real porque fluye y tiene lógica retórica. La veracidad, en cambio, exige correspondencia empírica con la realidad (códigos municipales, ensayos sísmicos de materiales, leyes escritas).
+              </p>
+              <p class="text-textMedium text-base sm:text-lg leading-relaxed">
+                La IA busca complacer la expectativa del usuario, inventando con asertividad resoluciones de códigos que aparentan solidez pero son inconsistentes e inexistentes en el marco normativo real de la municipalidad.
+              </p>
+            </div>
+            
+            <div class="space-y-6 flex flex-col justify-between">
+              <!-- Visual Diagram (No Emojis, Pure SVG) -->
+              <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl">
+                <span class="block text-xs uppercase font-bold text-textLight tracking-wider font-mono mb-2">Esquema: Verosimilitud Coherente vs Realidad Fáctica</span>
+                <svg viewBox="0 0 400 110" class="w-full h-auto">
+                  <rect x="10" y="10" width="170" height="90" rx="6" fill="#FFFBEB" stroke="#D97706" stroke-width="1.5"/>
+                  <text x="95" y="35" font-family="Space Grotesk" font-size="11" font-weight="bold" fill="#92400E" text-anchor="middle">VEROSÍMIL (Redacción)</text>
+                  <text x="95" y="60" font-family="Inter" font-size="8" fill="#B45309" text-anchor="middle">Aparente cohesión gramática</text>
+                  <text x="95" y="80" font-family="Inter" font-size="8" fill="#B45309" text-anchor="middle">Persuasión estadística predictiva</text>
+                  
+                  <rect x="220" y="10" width="170" height="90" rx="6" fill="#F0FDF4" stroke="#16A34A" stroke-width="1.5"/>
+                  <text x="305" y="35" font-family="Space Grotesk" font-size="11" font-weight="bold" fill="#166534" text-anchor="middle">VERAZ (Factual)</text>
+                  <text x="305" y="60" font-family="Inter" font-size="8" fill="#15803D" text-anchor="middle">Correspondencia física con sitio</text>
+                  <text x="305" y="80" font-family="Inter" font-size="8" fill="#15803D" text-anchor="middle">Códigos reales vigentes</text>
+                </svg>
+              </div>
+
+              <div class="bg-slate-50 p-6 rounded-2xl border-2 border-slate-200 space-y-4">
+                <div>
+                  <span class="block text-xs uppercase font-bold text-accent tracking-wider font-mono">Consigna de Auditoría Crítica</span>
+                  <p class="italic text-textDark text-base mt-2 leading-relaxed">
+                    Fuerza al modelo a separar hechos empíricos de deducciones de lenguaje estadístico.
+                  </p>
+                </div>
+                <div class="space-y-2">
+                  <span class="block text-xs uppercase font-bold text-textLight tracking-wider">Prompt de Verificación de Datos:</span>
+                  <div class="bg-white border border-slate-300 rounded-xl p-4 font-mono text-sm text-accent relative">
+                    <code id="prompt-p2">"Lista las afirmaciones clave del texto anterior y clasifícalas en: 1) Hechos factuales y coeficientes específicos contrastados, 2) Hipótesis generales y 3) Especulaciones que requieran control de un profesional matriculado."</code>
+                    <button onclick="copyPromptText('prompt-p2')" class="absolute top-3 right-3 px-3 py-1 bg-slate-100 hover:bg-accent hover:text-white border border-slate-300 text-textDark font-sans text-xs rounded uppercase font-bold transition-all shadow-sm">Copiar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        `
+      },
+      {
+        num: "03",
+        title: "Humano en el Bucle",
+        summary: "La toma de decisiones y la responsabilidad ética y técnica jamás se delegan en una máquina. El rol soberano de la matrícula profesional.",
+        body: `
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div class="space-y-4">
+              <h4 class="text-lg font-bold text-textDark uppercase tracking-wider font-mono border-b pb-2">La Firma y la Soberanía Humana</h4>
+              <p class="text-textMedium text-base sm:text-lg leading-relaxed">
+                El concepto de "Human in the Loop" (HITL) determina que los sistemas computacionales operan como andamiajes exploratorios, pero es la conciencia crítica humana la que valida y aprueba cada decisión.
+              </p>
+              <p class="text-textMedium text-base sm:text-lg leading-relaxed">
+                La firma de un plano, la aprobación de un cálculo estructural y la dirección de obra son atribuciones legales reservadas en exclusiva a los profesionales matriculados. El software es una herramienta; el criterio reside en el piloto del proyecto.
+              </p>
+            </div>
+            
+            <div class="space-y-6 flex flex-col justify-between">
+              <!-- Refined, beautifully styled dialéctica flow diagram (SVG) -->
+              <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl">
+                <span class="block text-xs uppercase font-bold text-textLight tracking-wider font-mono mb-2">Esquema: El Bucle de Control Dialéctico</span>
+                <svg viewBox="0 0 400 130" class="w-full h-auto">
+                  <rect x="10" y="35" width="80" height="60" rx="8" fill="#F1F5F9" stroke="#94A3B8" stroke-width="2"/>
+                  <text x="50" y="65" font-family="Space Grotesk" font-size="10" font-weight="bold" text-anchor="middle" fill="#0F172A">Intención Humana</text>
+                  
+                  <path d="M90 65 L130 65" stroke="#C23000" stroke-width="2" marker-end="url(#arrow)"/>
+                  
+                  <rect x="135" y="35" width="90" height="60" rx="8" fill="#FFF1F2" stroke="#FDA4AF" stroke-width="2"/>
+                  <text x="180" y="65" font-family="Space Grotesk" font-size="10" font-weight="bold" text-anchor="middle" fill="#9F1239">Generación IA</text>
+                  
+                  <path d="M225 65 L265 65" stroke="#C23000" stroke-width="2" marker-end="url(#arrow)"/>
+                  
+                  <rect x="270" y="35" width="120" height="60" rx="8" fill="#ECFDF5" stroke="#A7F3D0" stroke-width="2"/>
+                  <text x="330" y="60" font-family="Space Grotesk" font-size="10" font-weight="bold" text-anchor="middle" fill="#065F46">Control Piloto</text>
+                  <text x="330" y="75" font-family="Inter" font-size="8" text-anchor="middle" fill="#047857">(CIRSOC / Clima)</text>
+                  
+                  <path d="M330 95 C330 115, 50 115, 50 95" fill="none" stroke="#64748B" stroke-dasharray="4" stroke-width="1.5"/>
+                  <text x="190" y="122" font-family="Inter" font-size="8" font-weight="bold" fill="#64748B" text-anchor="middle">Iteración y Ajuste Situado</text>
+                  
+                  <defs>
+                    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                      <path d="M 0 0 L 10 5 L 0 10 z" fill="#C23000"/>
+                    </marker>
+                  </defs>
+                </svg>
+              </div>
+
+              <div class="bg-slate-50 p-6 rounded-2xl border-2 border-slate-200 space-y-4">
+                <div>
+                  <span class="block text-xs uppercase font-bold text-accent tracking-wider font-mono">Consigna de Auditoría Crítica</span>
+                  <p class="italic text-textDark text-base mt-2 leading-relaxed">
+                    Establece un flujo dialéctico donde asumes el rol de supervisor y revisor exigente.
+                  </p>
+                </div>
+                <div class="space-y-2">
+                  <span class="block text-xs uppercase font-bold text-textLight tracking-wider">Prompt de Auditoría Externa:</span>
+                  <div class="bg-white border border-slate-300 rounded-xl p-4 font-mono text-sm text-accent relative">
+                    <code id="prompt-p3">"Asume que soy el director de obra del proyecto. Evalúa esta propuesta estructural, señala sus puntos más débiles de acuerdo al código CIRSOC y propón alternativas conservadoras."</code>
+                    <button onclick="copyPromptText('prompt-p3')" class="absolute top-3 right-3 px-3 py-1 bg-slate-100 hover:bg-accent hover:text-white border border-slate-300 text-textDark font-sans text-xs rounded uppercase font-bold transition-all shadow-sm">Copiar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        `
+      },
+      {
+        num: "04",
+        title: "El Vals de GPT",
+        summary: "Estructura iterativa de diálogo dividida en tres tiempos metodológicos: Voy (consigna), Vengo (evaluación), Itero (ajuste situado).",
+        body: `
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div class="space-y-4">
+              <h4 class="text-lg font-bold text-textDark uppercase tracking-wider font-mono border-b pb-2">El Ritmo Dialéctico</h4>
+              <p class="text-textMedium text-base sm:text-lg leading-relaxed">
+                Una interacción académica con la IA descarta el uso de un prompt aislado. Se debe establecer una conversación metodológica estructurada en tres tiempos definidos:
+              </p>
+              <ul class="space-y-2 text-sm sm:text-base text-textMedium">
+                <li><strong class="text-accent">1. VOY (Consigna):</strong> Instrucción explícita, contextualizada, cargada con límites físicos locales.</li>
+                <li><strong class="text-blueTheory">2. VENGO (Control):</strong> Examen crítico del resultado arrojado, buscando inconsistencias.</li>
+                <li><strong class="text-emeraldCustom">3. ITERO (Refinamiento):</strong> Reorientar y condicionar al modelo para ajustar su salida al territorio real.</li>
+              </ul>
+            </div>
+            
+            <div class="space-y-6 flex flex-col justify-between">
+              <!-- Visual Step Timeline Diagram (No Emojis, Pure SVG) -->
+              <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl">
+                <span class="block text-xs uppercase font-bold text-textLight tracking-wider font-mono mb-2">Esquema: Los Tres Pasos del Vals</span>
+                <svg viewBox="0 0 400 110" class="w-full h-auto">
+                  <circle cx="60" cy="55" r="30" fill="#FEE2E2" stroke="#EF4444" stroke-width="2"/>
+                  <text x="60" y="58" font-family="Space Grotesk" font-size="10" font-weight="bold" fill="#991B1B" text-anchor="middle">VOY</text>
+                  
+                  <path d="M90 55 L130 55" stroke="#94A3B8" stroke-width="1.5" stroke-dasharray="3"/>
+                  
+                  <circle cx="190" cy="55" r="30" fill="#FEF3C7" stroke="#F59E0B" stroke-width="2"/>
+                  <text x="190" y="58" font-family="Space Grotesk" font-size="10" font-weight="bold" fill="#92400E" text-anchor="middle">VENGO</text>
+                  
+                  <path d="M220 55 L260 55" stroke="#94A3B8" stroke-width="1.5" stroke-dasharray="3"/>
+                  
+                  <circle cx="320" cy="55" r="30" fill="#D1FAE5" stroke="#10B981" stroke-width="2"/>
+                  <text x="320" y="58" font-family="Space Grotesk" font-size="10" font-weight="bold" fill="#065F46" text-anchor="middle">ITERO</text>
+                </svg>
+              </div>
+
+              <div class="bg-slate-50 p-6 rounded-2xl border-2 border-slate-200 space-y-4">
+                <div>
+                  <span class="block text-xs uppercase font-bold text-accent tracking-wider font-mono">Consigna de Auditoría Crítica</span>
+                  <p class="italic text-textDark text-base mt-2 leading-relaxed">
+                    Impide que el modelo use explicaciones predecibles e instálalo en una lógicas de diseño de bajo impacto ambiental para el desierto de Cuyo.
+                  </p>
+                </div>
+                <div class="space-y-2">
+                  <span class="block text-xs uppercase font-bold text-textLight tracking-wider">Prompt de Iteración Situada:</span>
+                  <div class="bg-white border border-slate-300 rounded-xl p-4 font-mono text-sm text-accent relative">
+                    <code id="prompt-p4">"Ignora soluciones constructivas que dependan de materiales importados de difícil acceso en Cuyo. Replantea la materialidad utilizando técnicas tradicionales y mano de obra del medio local."</code>
+                    <button onclick="copyPromptText('prompt-p4')" class="absolute top-3 right-3 px-3 py-1 bg-white hover:bg-accent hover:text-white border border-slate-300 text-textDark font-sans text-xs rounded uppercase font-bold transition-all shadow-sm">Copiar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        `
+      },
+      {
+        num: "05",
+        title: "Sedentarismo Cognitivo",
+        summary: "Prevención de la atrofia del juicio crítico y de las habilidades de cálculo cuando se delega de forma ciega el trabajo a respuestas automáticas.",
+        body: `
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div class="space-y-4">
+              <h4 class="text-lg font-bold text-textDark uppercase tracking-wider font-mono border-b pb-2">Delegación Ciega vs. Inteligencia Expandida</h4>
+              <p class="text-textMedium text-base sm:text-lg leading-relaxed">
+                El <strong class="text-accent font-bold">Sedentarismo Cognitivo</strong> ocurre cuando el profesional o estudiante adopta de forma automatizada las respuestas del software para evitar la fatiga mental inherente a la resolución de problemas técnicos complejos.
+              </p>
+              <p class="text-textMedium text-base sm:text-lg leading-relaxed">
+                <strong class="text-textDark font-bold">Delegación Cognitiva:</strong> Ceder a un software predictivo la toma de decisiones dimensionales y de asoleamiento destruye la capacidad del proyectista de anticipar fallos constructivos.
+              </p>
+              <p class="text-textMedium text-base sm:text-lg leading-relaxed">
+                <strong class="text-emeraldCustom font-bold">Inteligencia Expandida:</strong> Por el contrario, ocurre cuando el sistema se utiliza como andamiaje cognitivo externo que desafía las hipótesis del diseñador, obligándolo a fundamentar sus decisiones y cálculos con mayor rigor.
+              </p>
+            </div>
+            
+            <div class="space-y-6 flex flex-col justify-between">
+              <!-- Cognitive balance scale graphic (No Emojis, Pure SVG) -->
+              <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl">
+                <span class="block text-xs uppercase font-bold text-textLight tracking-wider font-mono mb-2">Esquema: Balance del Esfuerzo Intelectual</span>
+                <svg viewBox="0 0 400 110" class="w-full h-auto">
+                  <line x1="80" y1="80" x2="320" y2="80" stroke="#475569" stroke-width="4"/>
+                  <polygon points="200,50 185,80 215,80" fill="#1E293B"/>
+                  
+                  <!-- Left side down (Sedentarism) -->
+                  <circle cx="80" cy="80" r="15" fill="#EF4444"/>
+                  <text x="80" y="45" font-family="Space Grotesk" font-size="9" font-weight="bold" fill="#B91C1C" text-anchor="middle">Atrofia Cognitiva</text>
+                  <text x="80" y="58" font-family="Inter" font-size="8" fill="#B91C1C" text-anchor="middle">(Copia pasiva)</text>
+                  
+                  <!-- Right side up (Expanded) -->
+                  <circle cx="320" cy="80" r="15" fill="#10B981"/>
+                  <text x="320" y="45" font-family="Space Grotesk" font-size="9" font-weight="bold" fill="#047857" text-anchor="middle">Juicio Expandido</text>
+                  <text x="320" y="58" font-family="Inter" font-size="8" fill="#047857" text-anchor="middle">(Control activo)</text>
+                </svg>
+              </div>
+
+              <div class="bg-slate-50 p-6 rounded-2xl border-2 border-slate-200 space-y-4">
+                <div>
+                  <span class="block text-xs uppercase font-bold text-accent tracking-wider font-mono">Consigna de Auditoría Crítica</span>
+                  <p class="italic text-textDark text-base mt-2 leading-relaxed">
+                    Fuerza a la IA a debatir contra tu postura, estimulando tu juicio y músculo de razonamiento.
+                  </p>
+                </div>
+                <div class="space-y-2">
+                  <span class="block text-xs uppercase font-bold text-textLight tracking-wider">Prompt de Debate Técnico:</span>
+                  <div class="bg-white border border-slate-300 rounded-xl p-4 font-mono text-sm text-accent relative">
+                    <code id="prompt-p5">"Actúa como un crítico de arquitectura y argumenta por qué mi decisión de implantación bioclimática para este lote es errónea. No me des la razón de forma automática, cuestiona mis supuestos."</code>
+                    <button onclick="copyPromptText('prompt-p5')" class="absolute top-3 right-3 px-3 py-1 bg-white hover:bg-accent hover:text-white border border-slate-300 text-textDark font-sans text-xs rounded uppercase font-bold transition-all shadow-sm">Copiar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        `
+      },
+      {
+        num: "06",
+        title: "Incomodidad como motor",
+        summary: "La irrupción tecnológica no se ignora; se utiliza como tensión y catalizador para elevar la exigencia intelectual en el diseño del hábitat.",
+        body: `
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div class="space-y-4">
+              <h4 class="text-lg font-bold text-textDark uppercase tracking-wider font-mono border-b pb-2">El Rediseño Evaluativo</h4>
+              <p class="text-textMedium text-base sm:text-lg leading-relaxed">
+                La irrupción de modelos que redactan memorias o resuelven códigos destruye los pactos de evaluación de entrega tradicionales centrados solo en el producto final (el documento de texto o plano estático).
+              </p>
+              <p class="text-textMedium text-base sm:text-lg leading-relaxed">
+                La <strong class="text-accent font-bold">Incomodidad como motor</strong> implica entender la fricción en el aula como energía transformadora. Al elevar la barra de exigencia teórica y forzar a los alumnos a defender la viabilidad constructiva de sus maquetas en un coloquio crítico, convertimos la incertidumbre algorítmica en rigor proyectual.
+              </p>
+            </div>
+            
+            <div class="space-y-6 flex flex-col justify-between">
+              <!-- Visual Friction catalyst diagram (No Emojis, Pure SVG) -->
+              <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl">
+                <span class="block text-xs uppercase font-bold text-textLight tracking-wider font-mono mb-2">Esquema: Catalizador de Tensión Académica</span>
+                <svg viewBox="0 0 400 110" class="w-full h-auto">
+                  <path d="M 30,55 Q 115,10 200,55 T 370,55" fill="none" stroke="#C23000" stroke-width="3" stroke-dasharray="4"/>
+                  <circle cx="200" cy="55" r="18" fill="#0F172A"/>
+                  <text x="200" y="58" font-family="Space Grotesk" font-size="9" font-weight="bold" fill="#FFFFFF" text-anchor="middle">Fricción</text>
+                  <text x="90" y="85" font-family="Inter" font-size="8" fill="#64748B" text-anchor="middle">Incertidumbre Inicial</text>
+                  <text x="310" y="85" font-family="Inter" font-size="8" fill="#64748B" text-anchor="middle">Rigor Exigido Final</text>
+                </svg>
+              </div>
+
+              <div class="bg-slate-50 p-6 rounded-2xl border-2 border-slate-200 space-y-4">
+                <div>
+                  <span class="block text-xs uppercase font-bold text-accent tracking-wider font-mono">Consigna de Auditoría Crítica</span>
+                  <p class="italic text-textDark text-base mt-2 leading-relaxed">
+                    Genera una pauta de autoevaluación procesual para tus entregas de taller.
+                  </p>
+                </div>
+                <div class="space-y-2">
+                  <span class="block text-xs uppercase font-bold text-textLight tracking-wider">Prompt de Autoevaluación del Proceso:</span>
+                  <div class="bg-white border border-slate-300 rounded-xl p-4 font-mono text-sm text-accent relative">
+                    <code id="prompt-p6">"Estructura una matriz de autoevaluación donde evalúe cómo audité las sugerencias espaciales que diste, qué partes de tu propuesta descarté por sismorresistencia y cómo defendí mi autoría."</code>
+                    <button onclick="copyPromptText('prompt-p6')" class="absolute top-3 right-3 px-3 py-1 bg-white hover:bg-accent hover:text-white border border-slate-300 text-textDark font-sans text-xs rounded uppercase font-bold transition-all shadow-sm">Copiar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        `
+      },
+      {
+        num: "07",
+        title: "Vigilancia Epistemológica",
+        summary: "Filtros de control metódico para dudar de la neutralidad comercial, sesgo geográfico e inconsistencias dimensionales.",
+        body: `
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div class="space-y-4">
+              <h4 class="text-lg font-bold text-textDark uppercase tracking-wider font-mono border-b pb-2">Los Sesgos de la Red</h4>
+              <p class="text-textMedium text-base sm:text-lg leading-relaxed">
+                Las IAs son sistemas entrenados bajo un canon comercial y geográfico centralizado. Asumen de forma ingenua recursos, climas y presupuestos propios de economías de alta densidad industrial de otras latitudes.
+              </p>
+              <p class="text-textMedium text-base sm:text-lg leading-relaxed">
+                La vigilancia exige desconfiar de las lógicas automáticas y someterlas a rigurosos controles de escala, disponibilidad material real en el mercado mendocino e impacto ambiental.
+              </p>
+            </div>
+            
+            <div class="space-y-6 flex flex-col justify-between">
+              <!-- Visual filter concentric rings (No Emojis, Pure SVG) -->
+              <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl">
+                <span class="block text-xs uppercase font-bold text-textLight tracking-wider font-mono mb-2">Esquema: Los Tres Filtros de Vigilancia</span>
+                <svg viewBox="0 0 400 110" class="w-full h-auto">
+                  <circle cx="200" cy="55" r="45" fill="none" stroke="#94A3B8" stroke-width="1.5"/>
+                  <text x="200" y="23" font-family="Inter" font-size="8" fill="#475569" text-anchor="middle">Filtro Global</text>
+                  
+                  <circle cx="200" cy="55" r="30" fill="none" stroke="#3B82F6" stroke-width="1.5"/>
+                  <text x="200" y="38" font-family="Inter" font-size="8" fill="#1D4ED8" text-anchor="middle">Región Cuyo</text>
+                  
+                  <circle cx="200" cy="55" r="15" fill="#FEE2E2" stroke="#EF4444" stroke-width="1.5"/>
+                  <text x="200" y="58" font-family="Space Grotesk" font-size="8" font-weight="bold" fill="#991B1B" text-anchor="middle">SITIO</text>
+                </svg>
+              </div>
+
+              <div class="bg-slate-50 p-6 rounded-2xl border-2 border-slate-200 space-y-4">
+                <div>
+                  <span class="block text-xs uppercase font-bold text-accent tracking-wider font-mono">Consigna de Auditoría Crítica</span>
+                  <p class="italic text-textDark text-base mt-2 leading-relaxed">
+                    Evalúa la viabilidad local de las propuestas de sustentabilidad de la IA.
+                  </p>
+                </div>
+                <div class="space-y-2">
+                  <span class="block text-xs uppercase font-bold text-textLight tracking-wider">Prompt de Control de Viabilidad de Materiales:</span>
+                  <div class="bg-white border border-slate-300 rounded-xl p-4 font-mono text-sm text-accent relative">
+                    <code id="prompt-p7">"Evalúa críticamente los componentes mecánicos e insumos tecnológicos de tu propuesta previa. Lista cuáles de ellos no se consiguen o no son fabricados en la Provincia de Mendoza e indica alternativas viables de baja tecnología local."</code>
+                    <button onclick="copyPromptText('prompt-p7')" class="absolute top-3 right-3 px-3 py-1 bg-white hover:bg-accent hover:text-white border border-slate-300 text-textDark font-sans text-xs rounded uppercase font-bold transition-all shadow-sm">Copiar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        `
+      },
+      {
+        num: "08",
+        title: "Niveles de Integración",
+        summary: "Clasificación de los tipos de uso, desde la corrección básica de texto hasta la simulación activa de entidades autónomas de rol.",
+        body: `
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div class="space-y-4">
+              <h4 class="text-lg font-bold text-textDark uppercase tracking-wider font-mono border-b pb-2">La Escala de Autonomía</h4>
+              <p class="text-textMedium text-base sm:text-lg leading-relaxed">
+                No toda utilización de IA implica el mismo grado de delegación. Se proponen tres niveles de integración y control ético dentro de los talleres de diseño y proyecto espacial:
+              </p>
+              <ul class="space-y-2 text-sm sm:text-base text-textMedium">
+                <li><strong class="text-blue-700">Nivel 1 (Bajo):</strong> Asistencia en redacción, corrección de textos técnicos, traducciones y síntesis de ideas.</li>
+                <li><strong class="text-goldCustom">Nivel 2 (Medio):</strong> Copiloto de exploración espacial, simulación de materiales y análisis normativo.</li>
+                <li><strong class="text-accent">Nivel 3 (Alto):</strong> Simulación de entidades o contrapartes complejas para el testeo y validación.</li>
+              </ul>
+            </div>
+            
+            <div class="space-y-6 flex flex-col justify-between">
+              <!-- Visual Step Scale Ladder Diagram (No Emojis, Pure SVG) -->
+              <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl">
+                <span class="block text-xs uppercase font-bold text-textLight tracking-wider font-mono mb-2">Esquema: Los 3 Peldaños de la Integración</span>
+                <svg viewBox="0 0 400 110" class="w-full h-auto">
+                  <!-- Steps -->
+                  <rect x="30" y="75" width="100" height="25" rx="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.5"/>
+                  <text x="80" y="90" font-family="Space Grotesk" font-size="8" font-weight="bold" fill="#1D4ED8" text-anchor="middle">N1: Asistente</text>
+                  
+                  <rect x="150" y="45" width="100" height="55" rx="4" fill="#FEF3C7" stroke="#F59E0B" stroke-width="1.5"/>
+                  <text x="200" y="75" font-family="Space Grotesk" font-size="8" font-weight="bold" fill="#D97706" text-anchor="middle">N2: Copiloto</text>
+                  
+                  <rect x="270" y="15" width="100" height="85" rx="4" fill="#FEE2E2" stroke="#EF4444" stroke-width="1.5"/>
+                  <text x="320" y="60" font-family="Space Grotesk" font-size="8" font-weight="bold" fill="#B91C1C" text-anchor="middle">N3: Contraparte</text>
+                </svg>
+              </div>
+
+              <div class="bg-slate-50 p-6 rounded-2xl border-2 border-slate-200 space-y-4">
+                <div>
+                  <span class="block text-xs uppercase font-bold text-accent tracking-wider font-mono">Consigna de Auditoría Crítica</span>
+                  <p class="italic text-textDark text-base mt-2 leading-relaxed">
+                    Configura a la IA para simular una mesa de control técnico municipal estricta.
+                  </p>
+                </div>
+                <div class="space-y-2">
+                  <span class="block text-xs uppercase font-bold text-textLight tracking-wider">Prompt de Simulación de Contraparte:</span>
+                  <div class="bg-white border border-slate-300 rounded-xl p-4 font-mono text-sm text-accent relative">
+                    <code id="prompt-p8">"Actúa como un inspector del municipio encargado de la aprobación de planos. Revisa mi propuesta y rechaza todos los elementos que no respeten el código sísmico actual de la Provincia."</code>
+                    <button onclick="copyPromptText('prompt-p8')" class="absolute top-3 right-3 px-3 py-1 bg-white hover:bg-accent hover:text-white border border-slate-300 text-textDark font-sans text-xs rounded uppercase font-bold transition-all shadow-sm">Copiar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        `
+      }
+    ];
+
+    // Case Study: Biblioteca Comunitaria
+    const STEPPER_ECOSISTEMA = [
+      {
+        num: 1,
+        title: "Entender el Ecosistema Híbrido",
+        tool: "El Rol Directivo del Piloto",
+        prompt: "No aplica - Etapa introductoria conceptual",
+        body: `
+          <div class="space-y-4 text-base sm:text-lg text-textMedium leading-relaxed">
+            <p>
+              Un <strong class="text-accent font-bold">Ecosistema IA</strong> profesional no consiste en utilizar una sola ventana de chat de manera ingenua o desordenada. Es una red de herramientas interconectadas con funciones especializadas donde tú asumes la dirección técnica del proyecto:
+            </p>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-3">
+              <div class="p-6 bg-white border border-slate-300 rounded-2xl shadow-sm">
+                <strong class="block text-textDark mb-1">1. Perplexity</strong>
+                <p class="text-sm text-textMedium">Investigación empírica y geolocalización de precedentes reales en la web activa.</p>
+              </div>
+              <div class="p-6 bg-white border border-slate-300 rounded-2xl shadow-sm">
+                <strong class="block text-textDark mb-1">2. NotebookLM</strong>
+                <p class="text-sm text-textMedium">Análisis seguro y cerrado de las ordenanzas locales y normativas sin alucinaciones.</p>
+              </div>
+              <div class="p-6 bg-white border border-slate-300 rounded-2xl shadow-sm">
+                <strong class="block text-textDark mb-1">3. Gemini + Gems</strong>
+                <p class="text-sm text-textMedium">Ideación guiada y exploración dialéctica de alternativas bioclimáticas para el lote.</p>
+              </div>
+            </div>
+          </div>
+        `
+      },
+      {
+        num: 2,
+        title: "Investigación con Perplexity",
+        tool: "Perplexity AI (Investigación Geográfica)",
+        prompt: "Busca bibliotecas comunitarias construidas después de 2015 en áreas con climas áridos y alta radiación solar (por ejemplo, norte de Chile, desierto mexicano o sudoeste estadounidense). Detalla: nombre del proyecto, arquitecto responsable, materiales aplicados y estrategias pasivas de control solar. Incluye URLs reales de las fuentes consultadas.",
+        body: `
+          <div class="space-y-4 text-base sm:text-lg text-textMedium leading-relaxed">
+            <p>
+              En esta etapa del ecosistema, usamos Perplexity para recopilar y verificar casos construidos reales en condiciones ambientales áridas similares a Mendoza. Al proveer enlaces directos de procedencia, anulamos la tendencia de los modelos estándar a inventar arquitecturas inexistentes.
+            </p>
+            <div class="p-5 bg-slate-100 border border-slate-300 rounded-xl">
+              <strong class="text-sm font-bold text-accent uppercase block tracking-wider font-mono mb-2">Filtro de Veracidad de Precedentes:</strong>
+              <p class="text-sm text-textMedium leading-relaxed">
+                El sistema extrae información fáctica de portales especializados reales como Plataforma Arquitectura o ArchDaily, listando el uso de adobes compactados y galerías de sombra profunda.
+              </p>
+            </div>
+          </div>
+        `
+      },
+      {
+        num: 3,
+        title: "Control Normativo con NotebookLM",
+        tool: "NotebookLM (Análisis de Normas Locales)",
+        prompt: "Basándote únicamente en el PDF del Código de Edificación de la Municipalidad de Mendoza que acabo de cargar:\n1. ¿Cuál es el factor de ocupación del suelo (FOS) máximo permitido en la zona de borde periférico?\n2. ¿Existen regulaciones específicas para fachadas de tierra compactada o adobe?\n3. ¿Qué restricciones de retiro y altura máxima aplican?\nCita de forma exacta el número de artículo e inciso de donde extraes cada dato.",
+        body: `
+          <div class="space-y-4 text-base sm:text-lg text-textMedium leading-relaxed">
+            <p>
+              Para certificar que la biblioteca de nuestro barrio periférico cumpla rigurosamente con los límites de edificación urbana de Mendoza, subimos el PDF oficial del reglamento a NotebookLM. El análisis se limita estrictamente a la documentación cargada (tecnología RAG), anulando cualquier tipo de invención de leyes o decretos inexistentes.
+            </p>
+            <div class="p-5 bg-slate-100 border border-slate-300 rounded-xl">
+              <strong class="text-sm font-bold text-accent uppercase block tracking-wider font-mono mb-2">Filtro Legal y Territorial:</strong>
+              <p class="text-sm text-textMedium leading-relaxed">
+                El sistema te indica con precisión el porcentaje edificable del lote y advierte que las construcciones de tierra cruda requieren certificaciones estructurales y de encadenado especiales.
+              </p>
+            </div>
+          </div>
+        `
+      },
+      {
+        num: 4,
+        title: "Alternativas con Gemini + Gems",
+        tool: "Gemini Workspace (Ideación Guiada)",
+        prompt: "Teniendo en cuenta los precedentes bioclimáticos arrojados por Perplexity y los límites del código de Mendoza analizados por NotebookLM, elabora 3 propuestas de zonificación espacial para una biblioteca de 600 metros cuadrados. Opción 1: Centrada en muros de alta inercia térmica (sombra). Opción 2: Centrada en patios de ventilación cruzada evaporativa (agua). Opción 3: Centrada en galerías de uso comunitario abierto.",
+        body: `
+          <div class="space-y-4 text-base sm:text-lg text-textMedium leading-relaxed">
+            <p>
+              Una vez consolidada la información de precedentes y de normativas reales, recurrimos a Gemini para explorar variantes de zonificación espacial. Aquí la IA opera bajo tus estrictas pautas, convirtiéndose en un copiloto controlado de alternativas físicas.
+            </p>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm mt-2">
+              <div class="p-4 bg-white border border-slate-200 rounded-xl">
+                <strong class="text-accent block">Opción 1: Muro Inercial</strong>
+                <p class="text-textMedium mt-1">Gran masa térmica de adobe que mitiga la radiación del verano desértico mendocino.</p>
+              </div>
+              <div class="p-4 bg-white border border-slate-200 rounded-xl">
+                <strong class="text-blue-700 block">Opción 2: El Sifón Hídrico</strong>
+                <p class="text-textMedium mt-1">Patios interiores que capturan las brisas cordilleranas nocturnas.</p>
+              </div>
+              <div class="p-4 bg-white border border-slate-200 rounded-xl">
+                <strong class="text-goldCustom block">Opción 3: Galería Comunitaria</strong>
+                <p class="text-textMedium mt-1">Sombreados de cañizo y pérgolas que extienden las salas al exterior.</p>
+              </div>
+            </div>
+          </div>
+        `
+      },
+      {
+        num: 5,
+        title: "Intervención Técnica del Piloto",
+        tool: "Soberanía Técnica Profesional",
+        prompt: "La opción 1 propone muros de adobe de 60 cm de espesor. Sin embargo, no considera las solicitaciones sísmicas de la Zona 4 de Mendoza. Modifica la propuesta incorporando pórticos de hormigón armado sismorresistentes encadenando los paneles de barro.",
+        body: `
+          <div class="space-y-4 text-base sm:text-lg text-textMedium leading-relaxed">
+            <p>
+              Este es el momento cumbre del <strong class="text-accent font-bold">Humano en el Bucle</strong>. Como piloto y diseñador del proyecto, detectas el vacío técnico de la propuesta algorítmica y la obligas a modificarse incorporando pórticos de hormigón sismorresistentes encadenando los paneles de adobe, de acuerdo a las reglamentaciones vigentes en Cuyo.
+            </p>
+            <div class="p-5 bg-slate-100 border-2 border-slate-300 rounded-xl border-l-4 border-l-emeraldCustom">
+              <strong class="text-sm font-bold text-emeraldCustom uppercase block tracking-wider font-mono mb-1">Resultado Final del Ecosistema:</strong>
+              <p class="text-sm text-textMedium leading-relaxed">
+                Un anteproyecto de biblioteca bioclimática que respeta de manera rigurosa la sismorresistencia, cumple el código municipal y responde al entorno periurbano local.
+              </p>
+            </div>
+          </div>
+        `
+      }
+    ];
+
+    // 4 Architecture and Construction cases for students
+    const CASOS_PRACTICOS = [
+      {
+        title: "Espacio Público y Confort Térmico",
+        desc: "Resolución de un paseo peatonal accesible y sombreado en la periferia de Mendoza, mitigando la isla de calor veraniego de los materiales sintéticos.",
+        tags: ["Urbanismo", "Materiales de Albedo", "Clima Árido"],
+        voy: "Propón el diseño de un recorrido peatonal accesible para un parque lineal en Mendoza, especificando solados alternativos al asfalto que no acumulen calor extremo en verano.",
+        vengo: [
+          "¿La IA sugirió de manera descuidada revestimientos plásticos o asfalto oscuro de alta emisividad?",
+          "¿Omitió la incorporación de acequias o canales para capturar el escurrimiento de agua de lluvia?",
+          "¿Propuso especies arbóreas importadas que requieren abundante agua para no secarse?"
+        ],
+        itero: "Rediseña la propuesta utilizando pavimentos intertrabados de hormigón de alto albedo, canales de escurrimiento de piedra aluvial y vegetación xerófila autóctona de Cuyo."
+      },
+      {
+        title: "Vivienda Unifamiliar de Adobe y Sismo",
+        desc: "Anteproyecto de una vivienda modular de bajo presupuesto en Lavalle, combinando construcción tradicional de tierra con seguridad estructural sísmica.",
+        tags: ["Sismorresistencia", "Adobe Compactado", "CIRSOC 103"],
+        voy: "Estructura la espacialidad y cimentación de una vivienda de 80 m² con muros de inercia térmica de adobe crudo para un clima desértico con alta amplitud térmica.",
+        vengo: [
+          "¿La IA asumió falsamente que los muros de adobe resisten empujes sísmicos sin refuerzos?",
+          "¿Omitió la impermeabilización de la base para evitar el ascenso de humedad del suelo por capilaridad?",
+          "¿Diseñó techos planos de tierra sin pendiente adecuada para las lluvias torrenciales de verano?"
+        ],
+        itero: "Ajusta la propuesta incorporando una platea de hormigón armado, sobrecimientos impermeabilizados de piedra y una estructura de pórticos de hormigón armado (columnas y vigas de corona) que encadene y confine los muros de barro."
+      },
+      {
+        title: "Patrimonio Histórico y Fachadas",
+        desc: "Preservación y consolidación de fachadas antiguas de mampostería portante en la Capital de Mendoza, adaptando aberturas al asoleamiento.",
+        tags: ["Patrimonio", "Código de Edificación", "Sombreado Pasivo"],
+        voy: "Plantea una intervención de fachada para un edificio histórico del año 1920 en la Ciudad de Mendoza, buscando maximizar la iluminación natural de las oficinas interiores.",
+        vengo: [
+          "¿La IA sugirió demoler paños portantes sin considerar la debilidad estructural ante sismos?",
+          "¿Diseñó grandes fachadas vidriadas al oeste que provocarían sobrecalentamiento extremo?",
+          "¿Ignoró los decretos patrimoniales de conservación de fachadas históricas de la municipalidad?"
+        ],
+        itero: "Rediseña la intervención preservando los paños portantes originales y agregando parasoles metálicos exteriores de geometría calculada para bloquear el sol de la tarde en verano e ingresarlo en invierno."
+      },
+      {
+        title: "Planificación Territorial y Piedemonte",
+        desc: "Auditoría de loteos y trazados urbanos en zonas del piedemonte mendocino con altos riesgos de escurrimientos aluviales y erosión de suelos.",
+        tags: ["Piedemonte", "Riesgo Aluvial", "Erosión"],
+        voy: "Evalúa la viabilidad de un loteo residencial en el piedemonte de Mendoza, especificando la traza de calles y defensas contra crecidas aluviales.",
+        vengo: [
+          "¿La IA trazó calles perpendiculares a las pendientes, facilitando que se conviertan en torrentes?",
+          "¿Ignoró el riesgo aluvial y los cauces de arroyos secos temporarios que se activan con tormentas?",
+          "¿Sugerió pavimentar toda la superficie reduciendo drásticamente la absorción natural del suelo?"
+        ],
+        itero: "Ajust el trazado urbano respetando las curvas de nivel naturales, reservando los cauces aluviales como parques inundables públicos y prohibiendo el asasfalto continuo para favorecer la infiltración."
+      }
+    ];
+
+    // Detailed Tools data for visual drawer cards
+    const TOOLS_FLIP_DATA = [
+      {
+        id: "perplexity",
+        name: "Perplexity AI",
+        category: "Investigación",
+        desc: "Buscador semántico avanzado que indexa la web activa en tiempo real. Indispensable para rastrear precedentes reales y validados con enlaces directos.",
+        url: "https://www.perplexity.ai"
+      },
+      {
+        id: "notebooklm",
+        name: "NotebookLM",
+        category: "Análisis de Corpus",
+        desc: "Entorno RAG cerrado de Google. Te permite cargar códigos de edificación, normativas y reglamentos de sismorresistencia específicos y realizar consultas seguras.",
+        url: "https://notebooklm.google"
+      },
+      {
+        id: "gemini",
+        name: "Exploración e Ideación",
+        desc: "Plataforma de alta densidad de diálogo dialéctico. Funciona como un copiloto crítico para explorar hipótesis espaciales mediante dinámicas de contra-pregunta y debate constructivo.",
+        url: "https://gemini.google.com"
+      }
+    ];
+
+    // Interactive Double Checklist Data (Ideas/Proposals)
+    const CHECKLIST_STUDENT_ITEMS = [
+      "Bitácora de Trazabilidad: Registrar por escrito cada una de las consultas de prompt, herramientas y versiones de IA utilizadas.",
+      "Validación de Citas Académicas: Controlar que las referencias, autores, revistas o libros citados por la IA existan empíricamente.",
+      "Protección de Boceto Primario: Elaborar a mano los primeros croquis de la idea de partido antes de ingresar texto a las plataformas.",
+      "Coloquio Presencial Preparado: Ser capaz de defender conceptualmente de viva voz todas las sugerencias de diseño arrojadas por el sistema.",
+      "Separación de Criterio Propio: Identificar qué decisiones de implantación espacial provienen de un análisis propio y cuáles de sugerencias algorítmicas.",
+      "Vigilancia de Escala Métrica: Confirmar manualmente que los pasillos, espesores de muro e ingresos de luz sugeridos por el chat correspondan a medidas humanas.",
+      "Control de Bibliografía Local: Contrastar las hipótesis bioclimáticas con textos de referencia de la cátedra e investigadores locales.",
+      "Declaración Expresa de Uso: Declarar de manera transparente qué secciones del trabajo de investigación fueron auxiliadas en redacción o corrección."
+    ];
+
+    const CHECKLIST_PROFESSIONAL_ITEMS = [
+      "Responsabilidad Civil Firmante: Entender y asumir que la firma en la documentación municipal te responsabiliza de forma absoluta y penal.",
+      "Auditoría Estructural Símica: Verificación de secciones e inercias resistentes bajo rigurosas directivas INPRES-CIRSOC (Zona 4).",
+      "Seguridad de Datos del Comitente: Evitar subir planos constructivos privados, información catastral o datos de clientes a servidores de IA públicos.",
+      "Verificación de Ordenanzas Vigentes: Validar que los retiros mínimos, FOS, FOT y alturas límites correspondan de forma fáctica al código municipal actual.",
+      "Soberanía del Detalle Técnico: Calcular e inspeccionar el comportamiento de uniones de materiales, impermeabilizaciones y barreras contra agua.",
+      "Climatología de Sitio Mendoza: Adaptar el diseño de parasoles y asoleamiento a la amplitud térmica extrema y ráfagas de viento Zonda de Mendoza.",
+      "Estudio de Costos de Mercado Real: Corroborar que los materiales indicados en las especificaciones existan disponibles en los corralones de la zona.",
+      "Inspección de Obra Física: Realizar visitas y mediciones in situ del terreno para contrastar contra los datos dimensionales de cualquier software predictivo."
+    ];
+
+    // 16 Terms for the Bingo Game Board
+    const BINGO_TERMS = [
+      "Detectó Ley Alucinada",
+      "Validó URL Externa",
+      "Filtro de Clima Cuyo",
+      "Control del Retorno",
+      "Cuestionó Medida de Viga",
+      "Rechazó Copia Directa",
+      "Rastreó Código Municipal",
+      "Detectó Sesgo de Idioma",
+      "Evitó Muro de Vidrio",
+      "Ajustó Detalle de Adobe",
+      "Verificó Peso de Fachada",
+      "Frenó Pereza Intelectual",
+      "Auditoría de Dimensiones",
+      "Uso de RAG Seguro",
+      "Firma Civil Indelegable",
+      "Prompt del Vals Dominado"
+    ];
+
+    // Conceptual trigger data for initial states
+    const MODALS = {
+      miedo: {
+        k: "DIAGNÓSTICO INICIAL",
+        t: "Habitar el Miedo al Reemplazo",
+        b: `
+          <div class="space-y-4">
+            <p class="text-textMedium text-base sm:text-lg leading-relaxed">El temor a la irrelevancia ante la velocidad algorítmica es una respuesta comprensible. Sin embargo, este taller enseña que el motor de la IA carece de comprensión física y sensibilidad del territorio.</p>
+            <div class="p-6 bg-slate-50 border-2 border-slate-200 rounded-xl">
+              <strong class="text-textDark block text-base uppercase font-mono tracking-wider">Criterio de Vigilancia:</strong>
+              <p class="text-sm text-textMedium mt-2 leading-relaxed">El miedo se disuelve cuando comprendes que la máquina solo opera sobre correlaciones estadísticas. Tú eres el único que puede interpretar la carga poética, la viabilidad constructiva y el riesgo sísmico de un plano.</p>
+            </div>
+          </div>
+        `
+      },
+      bronca: {
+        k: "DIAGNÓSTICO INICIAL",
+        t: "Canalizar la Bronca frente al Plagio",
+        b: `
+          <div class="space-y-4">
+            <p class="text-textMedium text-base sm:text-lg leading-relaxed">La indignación frente a la entrega de copias textuales automáticas es el síntoma de que un pacto pedagógico ha caducado. Castigar el uso del software es inviable.</p>
+            <div class="p-6 bg-slate-50 border-2 border-slate-200 rounded-xl">
+              <strong class="text-textDark block text-base uppercase font-mono tracking-wider">Criterio de Vigilancia:</strong>
+              <p class="text-sm text-textMedium mt-2 leading-relaxed">Canalizamos la bronca reformulando la evaluación: en lugar de calificar el producto final, calificamos la capacidad de auditar la respuesta, documentar los hilos de prompt y defender la entrega de forma presencial.</p>
+            </div>
+          </div>
+        `
+      },
+      curiosidad: {
+        k: "DIAGNÓSTICO INICIAL",
+        t: "La Curiosidad como Andamio Riguroso",
+        b: `
+          <div class="space-y-4">
+            <p class="text-textMedium text-base sm:text-lg leading-relaxed">La fascinación tecnológica debe estar acompañada de una profunda sospecha metodológica. Una curiosidad sin criterio conduce al sedentarismo cognitivo.</p>
+            <div class="p-6 bg-slate-50 border-2 border-slate-200 rounded-xl">
+              <strong class="text-textDark block text-base uppercase font-mono tracking-wider">Criterio de Vigilancia:</strong>
+              <p class="text-sm text-textMedium mt-2 leading-relaxed">Usa la IA para multiplicar tus hipótesis iniciales, encontrar vacíos teóricos en tu propia investigación y simular debates exigentes antes de la entrega final.</p>
+            </div>
+          </div>
+        `
+      }
+    };
+
+    // Predefined ethical and technical commitments for students
+    const COMPROMISOS_PREDEFINIDOS = [
+      {
+        id: "c1",
+        label: "Responsabilidad Civil",
+        text: "Me comprometo a asumir plenamente la responsabilidad civil, legal e intelectual de mis proyectos, entendiendo que ningún algoritmo o simulación exime mi firma técnica."
+      },
+      {
+        id: "c2",
+        label: "Soberanía Bioclimática",
+        text: "Me comprometo a auditar críticamente los sesgos climáticos e importados de la IA, priorizando materiales locales y las lógicas áridas de la región cuyana."
+      },
+      {
+        id: "c3",
+        label: "Sismorresistencia Indelegable",
+        text: "Me comprometo a validar de forma independiente todos los coeficientes, dimensiones y solicitaciones estructurales bajo reglamentos INPRES-CIRSOC."
+      },
+      {
+        id: "c4",
+        label: "Vigilancia de Alucinaciones",
+        text: "Me comprometo a desconfiar de las lógicas automáticas, dudar de las leyes o normativas municipales citadas y corroborar cada fuente factual de forma manual."
+      },
+      {
+        id: "c5",
+        label: "Inteligencia Expandida",
+        text: "Me comprometo a utilizar los modelos generativos exclusivamente como andamiajes exploratorios para desafiar mis propias posturas y nunca como sustitutos de mi razonamiento formal."
+      }
+    ];
+
+    // Global Active States
+    let activeStepIndex = 0;
+    let activeCaseIndex = 0;
+    let activeChecklistType = 'student'; // 'student' or 'pro'
+    let studentChecklistArray = new Array(8).fill(false);
+    let professionalChecklistArray = new Array(8).fill(false);
+    let bingoStateArray = new Array(16).fill(false);
+
+    // LocalStorage Keys
+    const LOCAL_NOTES_KEY = "ia_manual_responsabilidad_notes_2026";
+    const LOCAL_DILEMMA_KEY = "ia_manual_responsabilidad_dilema_2026";
+    const LOCAL_STUDENT_CHK_KEY = "ia_manual_responsabilidad_student_checklist_2026";
+    const LOCAL_PRO_CHK_KEY = "ia_manual_responsabilidad_pro_checklist_2026";
+    const LOCAL_BINGO_KEY = "ia_manual_responsabilidad_bingo_2026";
+
+    window.onload = function() {
+      loadSavedLocalStorage();
+      renderAxesCards();
+      renderStepperNavBar();
+      renderActiveStep();
+      renderCasesTabControls();
+      renderActiveCaseDashboard();
+      renderBingoBoard();
+      renderToolsFlipBoard();
+      renderChecklistBoard();
+      renderCommitmentSelectors();
+      showToastNotification("IA: Criterio y Responsabilidad cargado.");
+    }
+
+    function loadSavedLocalStorage() {
+      const savedNotes = localStorage.getItem(LOCAL_NOTES_KEY);
+      if (savedNotes) {
+        document.getElementById('personal-bitacora-text').value = savedNotes;
+      }
+      
+      const savedDilemma = localStorage.getItem(LOCAL_DILEMMA_KEY);
+      if (savedDilemma) {
+        document.getElementById('dilemma-reasoning').value = savedDilemma;
+      }
+
+      const savedStudentChk = localStorage.getItem(LOCAL_STUDENT_CHK_KEY);
+      if (savedStudentChk) {
+        studentChecklistArray = JSON.parse(savedStudentChk);
+      }
+
+      const savedProChk = localStorage.getItem(LOCAL_PRO_CHK_KEY);
+      if (savedProChk) {
+        professionalChecklistArray = JSON.parse(savedProChk);
+      }
+
+      const savedBingo = localStorage.getItem(LOCAL_BINGO_KEY);
+      if (savedBingo) {
+        bingoStateArray = JSON.parse(savedBingo);
+      }
+    }
+
+    function renderAxesCards() {
+      const grid = document.getElementById('axes-grid');
+      grid.innerHTML = '';
+      CONCEPTOS.forEach((item, index) => {
+        grid.innerHTML += `
+          <button onclick="openAxesModal(${index})" class="group text-left p-6 sm:p-8 bg-white hover:bg-slate-50 border-2 border-slate-200 hover:border-accent/40 rounded-2xl transition-all duration-300 transform hover:-translate-y-1 relative overflow-hidden flex flex-col justify-between min-h-[250px] shadow-sm">
+            <div class="absolute -right-4 -bottom-4 text-slate-200/40 font-display font-black text-8xl group-hover:text-accent/10 transition-all duration-300 pointer-events-none select-none">${item.num}</div>
+            <div class="space-y-3 relative z-10">
+              <span class="text-xs font-mono text-accent font-extrabold uppercase tracking-widest">EJE ${item.num}</span>
+              <h3 class="text-xl sm:text-2xl font-display font-bold text-textDark group-hover:text-accent transition-colors leading-tight">${item.title}</h3>
+              <p class="text-sm sm:text-base text-textMedium leading-relaxed">${item.summary}</p>
+            </div>
+            <span class="text-sm font-bold text-accent group-hover:translate-x-1.5 transition-transform inline-flex items-center gap-1 mt-6">
+              Ver Análisis Teórico →
+            </span>
+          </button>
+        `;
+      });
+    }
+
+    function renderStepperNavBar() {
+      const bar = document.getElementById('stepper-nav');
+      bar.innerHTML = '';
+      STEPPER_ECOSISTEMA.forEach((step, index) => {
+        const isActive = index === activeStepIndex;
+        bar.innerHTML += `
+          <button onclick="changeActiveStep(${index})" role="tab" aria-selected="${isActive}" class="shrink-0 flex items-center gap-2.5 px-5 py-3 rounded-full border-2 text-xs sm:text-sm font-bold uppercase tracking-wider transition-all duration-300 ${
+            isActive 
+              ? 'bg-accent border-accent text-white shadow-md' 
+              : 'bg-slate-100 border-slate-300 text-textMedium hover:border-slate-400 hover:bg-slate-200'
+          }">
+            <span class="w-6 h-6 rounded-full bg-white/25 flex items-center justify-center text-[11px] font-mono">${step.num}</span>
+            <span>Paso 0${step.num}</span>
+          </button>
+        `;
+      });
+    }
+
+    function renderActiveStep() {
+      const step = STEPPER_ECOSISTEMA[activeStepIndex];
+      const dashboard = document.getElementById('stepper-content');
+      
+      dashboard.innerHTML = `
+        <div class="space-y-6">
+          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-slate-300 pb-5">
+            <div>
+              <span class="text-xs sm:text-sm font-mono text-accent uppercase font-extrabold tracking-widest">ETAPA 0${step.num} DE 05</span>
+              <h3 class="text-2xl sm:text-3xl font-display font-bold text-textDark mt-1 leading-tight">${step.title}</h3>
+            </div>
+            <div class="px-4 py-2 rounded-xl bg-accent/10 border-2 border-accent/20 text-xs sm:text-sm font-bold text-accent uppercase tracking-wider font-mono">
+              ${step.tool}
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            <!-- Left side: conceptual details -->
+            <div class="lg:col-span-7 space-y-4 text-base sm:text-lg text-textMedium">
+              ${step.body}
+            </div>
+
+            <!-- Right side: responsive prompt boxes -->
+            <div class="lg:col-span-5 space-y-4">
+              ${step.prompt !== "No aplica - Etapa introductoria conceptual" ? `
+                <div class="p-6 bg-white border-2 border-slate-300 rounded-2xl space-y-4 shadow-sm">
+                  <div class="flex justify-between items-center border-b border-slate-100 pb-3">
+                    <span class="text-xs sm:text-sm font-bold text-accent uppercase tracking-wider font-mono">Instrucción para copiar:</span>
+                    <button onclick="copyPromptText('stepper-prompt-${step.num}')" class="px-4 py-2 bg-slate-100 hover:bg-accent hover:text-white border border-slate-300 text-textDark font-sans text-xs rounded uppercase font-bold transition-all shadow-sm">Copiar</button>
+                  </div>
+                  <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl font-mono text-sm text-textDark leading-relaxed max-h-[180px] overflow-y-auto">
+                    <code id="stepper-prompt-${step.num}">${step.prompt}</code>
+                  </div>
+                  <p class="text-xs sm:text-sm text-textLight leading-relaxed">Ejecuta este prompt en el entorno recomendado para condicionar los parámetros estructurales del modelo.</p>
+                </div>
+              ` : `
+                <div class="p-8 bg-white border-2 border-slate-300 rounded-2xl text-center space-y-4 shadow-sm">
+                  <span class="block text-xs font-bold text-accent font-mono uppercase tracking-widest">Taller Mendoza</span>
+                  <h4 class="text-lg font-bold text-textDark uppercase tracking-wider font-display">Acreditación Metodológica</h4>
+                  <p class="text-sm sm:text-base text-textMedium leading-relaxed">Inicia la simulación del ecosistema asegurando la trazabilidad de cada una de tus búsquedas iniciales.</p>
+                </div>
+              `}
+            </div>
+          </div>
+
+          <!-- Process flow navigation buttons -->
+          <div class="flex justify-between items-center pt-6 border-t border-slate-300 flex-wrap gap-3">
+            <button onclick="changeActiveStep(${activeStepIndex - 1})" ${activeStepIndex === 0 ? 'disabled' : ''} class="px-6 py-3 rounded-full border-2 border-slate-300 hover:bg-slate-200 text-sm font-bold uppercase tracking-wider transition-all disabled:opacity-30 disabled:pointer-events-none text-textMedium">
+              Anterior
+            </button>
+            <button onclick="changeActiveStep(${activeStepIndex + 1})" ${activeStepIndex === STEPPER_ECOSISTEMA.length - 1 ? 'disabled' : ''} class="px-6 py-3 rounded-full bg-accent hover:bg-accentHover text-white text-sm font-bold uppercase tracking-wider transition-all disabled:opacity-30 disabled:pointer-events-none shadow-md">
+              Siguiente
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    function changeActiveStep(index) {
+      if (index >= 0 && index < STEPPER_ECOSISTEMA.length) {
+        activeStepIndex = index;
+        renderStepperNavBar();
+        renderActiveStep();
+      }
+    }
+
+    function renderCasesTabControls() {
+      const container = document.getElementById('cases-tabs');
+      container.innerHTML = '';
+      CASOS_PRACTICOS.forEach((c, index) => {
+        const isActive = index === activeCaseIndex;
+        container.innerHTML += `
+          <button onclick="changeActiveCase(${index})" role="tab" aria-selected="${isActive}" class="px-5 py-3 rounded-full text-xs sm:text-sm font-bold uppercase tracking-wider transition-all duration-300 ${
+            isActive ? 'bg-accent text-white shadow-md' : 'text-textMedium hover:text-textDark hover:bg-slate-300/40'
+          }">
+            Caso 0${index + 1}
+          </button>
+        `;
+      });
+    }
+
+    function renderActiveCaseDashboard() {
+      const container = document.getElementById('cases-content');
+      const c = CASOS_PRACTICOS[activeCaseIndex];
+      
+      container.innerHTML = `
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+          
+          <!-- Column 1: Case Profile & Framework -->
+          <div class="bg-slate-50 border-2 border-slate-200 rounded-2xl p-6 sm:p-8 flex flex-col justify-between space-y-6">
+            <div>
+              <span class="text-xs sm:text-sm font-mono text-accent uppercase font-extrabold tracking-wider">PRÁCTICA DEL ESTUDIANTE 0${activeCaseIndex + 1}</span>
+              <h3 class="text-2xl sm:text-3xl font-display font-bold text-textDark mt-1.5 leading-tight">${c.title}</h3>
+              <p class="text-textMedium text-base sm:text-lg mt-3 leading-relaxed">${c.desc}</p>
+            </div>
+
+            <div class="flex flex-wrap gap-2 pt-2">
+              ${c.tags.map(t => `<span class="px-3 py-1 rounded-full bg-white border border-slate-300 text-xs font-bold text-textMedium uppercase tracking-widest font-mono">${t}</span>`).join('')}
+            </div>
+
+            <div class="bg-white border border-slate-200 rounded-xl p-5 mt-auto">
+              <span class="block text-xs uppercase font-bold text-accent tracking-wider mb-2 font-mono">Foco de Vigilancia de Obra:</span>
+              <p class="text-sm text-textMedium leading-relaxed">
+                Este caso de estudio pone a prueba la consistencia material de los cerramientos ante la sismorresistencia mendocina de la Zona Sísmica 4 de alta peligrosidad.
+              </p>
+            </div>
+
+            <!-- Case-specific Notes Integration -->
+            <div class="border-t border-slate-200 pt-5 space-y-3">
+              <label for="reflexion-c-${activeCaseIndex}" class="block text-xs sm:text-sm font-bold uppercase text-textDark tracking-wider font-mono">Mis anotaciones de trazabilidad para este caso:</label>
+              <textarea id="reflexion-c-${activeCaseIndex}" oninput="saveCaseSpecificReflection(${activeCaseIndex}, this.value)" class="w-full bg-white border border-slate-300 rounded-lg p-4 text-base text-textDark focus:outline-none focus:border-accent min-h-[110px]" placeholder="Anota los supuestos erróneos de cálculo o clima que encontraste..."></textarea>
+            </div>
+          </div>
+
+          <!-- Column 2: Voy-Vengo-Itero workflow panels -->
+          <div class="space-y-6 flex flex-col justify-between">
+            
+            <!-- VOY (Formulo) -->
+            <div class="bg-slate-50 border-2 border-slate-200 rounded-xl overflow-hidden shadow-sm flex-1">
+              <div class="bg-blueTheory/10 border-b border-slate-200 px-6 py-4 flex justify-between items-center">
+                <span class="text-xs sm:text-sm font-bold uppercase text-blue-800 tracking-wider font-mono">1. VOY (Consigna con restricciones)</span>
+                <span class="text-xs text-textLight uppercase font-extrabold font-mono">Entrada</span>
+              </div>
+              <div class="p-6 space-y-4">
+                <p class="text-base text-textMedium italic leading-relaxed">"${c.voy}"</p>
+                <div class="flex justify-end">
+                  <button onclick="copyPromptText('prompt-case-voy')" class="px-4 py-2 bg-white hover:bg-blueTheory hover:text-white border-2 border-slate-300 hover:border-blueTheory text-textDark text-xs sm:text-sm font-bold uppercase tracking-wider rounded-lg transition-all shadow-sm">
+                    Copiar Prompt
+                  </button>
+                  <code id="prompt-case-voy" class="hidden">${c.voy}</code>
+                </div>
+              </div>
+            </div>
+
+            <!-- VENGO (Verifico) -->
+            <div class="bg-slate-50 border-2 border-slate-200 rounded-xl overflow-hidden shadow-sm flex-1 mt-4">
+              <div class="bg-goldCustom/10 border-b border-slate-200 px-6 py-4 flex justify-between items-center">
+                <span class="text-xs sm:text-sm font-bold uppercase text-goldCustom tracking-wider font-mono">2. VENGO (Audito las salidas)</span>
+                <span class="text-xs text-textLight uppercase font-extrabold font-mono">Verificación</span>
+              </div>
+              <div class="p-6 font-medium">
+                <p class="text-base text-textDark mb-4 font-bold">Filtros críticos que debes realizar sobre la respuesta:</p>
+                <ul class="space-y-2">
+                  ${c.vengo.map(v => `
+                    <li class="flex items-start gap-3 bg-white p-3.5 rounded-xl border border-slate-200 text-sm sm:text-base text-textMedium">
+                      <span class="text-accent font-black">X</span>
+                      <span class="leading-relaxed">${v}</span>
+                    </li>
+                  `).join('')}
+                </ul>
+              </div>
+            </div>
+
+            <!-- ITERO (Refino) -->
+            <div class="bg-slate-50 border-2 border-slate-200 rounded-xl overflow-hidden shadow-sm flex-1 mt-4">
+              <div class="bg-emeraldCustom/10 border-b border-slate-200 px-6 py-4 flex justify-between items-center">
+                <span class="text-xs sm:text-sm font-bold uppercase text-emeraldCustom tracking-wider font-mono">3. ITERO (Vuelvo a condicionar)</span>
+                <span class="text-xs text-textLight uppercase font-extrabold font-mono">Ajuste</span>
+              </div>
+              <div class="p-6 space-y-4">
+                <p class="text-base text-textMedium italic leading-relaxed">"${c.itero}"</p>
+                <div class="flex justify-end">
+                  <button onclick="copyPromptText('prompt-case-itero')" class="px-4 py-2 bg-white hover:bg-emeraldCustom hover:text-white border-2 border-slate-300 hover:border-emeraldCustom text-textDark text-xs sm:text-sm font-bold uppercase tracking-wider rounded-lg transition-all shadow-sm">
+                    Copiar Ajuste
+                  </button>
+                  <code id="prompt-case-itero" class="hidden">${c.itero}</code>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      `;
+
+      // Hydrating inputs with localStorage
+      const savedCaseNotes = localStorage.getItem(`ia_case_specific_notes_${activeCaseIndex}`);
+      if (savedCaseNotes) {
+        document.getElementById(`reflexion-c-${activeCaseIndex}`).value = savedCaseNotes;
+      }
+    }
+
+    function changeActiveCase(index) {
+      if (index >= 0 && index < CASOS_PRACTICOS.length) {
+        activeCaseIndex = index;
+        renderCasesTabControls();
+        renderActiveCaseDashboard();
+      }
+    }
+
+    function saveCaseSpecificReflection(index, value) {
+      localStorage.setItem(`ia_case_specific_notes_${index}`, value);
+    }
+
+    function renderBingoBoard() {
+      const grid = document.getElementById('bingo-grid');
+      grid.innerHTML = '';
+
+      BINGO_TERMS.forEach((term, index) => {
+        const isFreeSpace = index === 5;
+        const isMarked = isFreeSpace || bingoStateArray[index];
+        if (isFreeSpace && !bingoStateArray[index]) {
+          bingoStateArray[index] = true;
+        }
+
+        grid.innerHTML += `
+          <button onclick="toggleBingoItem(${index}, ${isFreeSpace})" class="p-5 rounded-2xl text-center font-display text-xs sm:text-sm font-bold border-2 transition-all duration-300 flex items-center justify-center min-h-[110px] uppercase tracking-wider ${
+            isFreeSpace 
+              ? 'bg-accent border-accent text-white shadow-md font-black italic' 
+              : isMarked 
+                ? 'bg-accent/15 border-accent text-accent font-black scale-[0.98]' 
+                : 'bg-white border-slate-200 text-textMedium hover:border-slate-400 hover:text-textDark hover:bg-slate-50 shadow-sm'
+          }">
+            ${isFreeSpace ? 'CONTROL REGLAMENTARIO' : term}
+          </button>
+        `;
+      });
+      updateBingoDashboardStats();
+    }
+
+    function toggleBingoItem(index, isFreeSpace) {
+      if (isFreeSpace) return;
+      bingoStateArray[index] = !bingoStateArray[index];
+      localStorage.setItem(LOCAL_BINGO_KEY, JSON.stringify(bingoStateArray));
+      renderBingoBoard();
+      verifyBingoWinCondition();
+    }
+
+    function updateBingoDashboardStats() {
+      const count = bingoStateArray.filter(x => x).length - 1; 
+      document.getElementById('bingo-stats').textContent = `Marcadores activos: ${count} / 15`;
+    }
+
+    function verifyBingoWinCondition() {
+      const combos = [
+        [0, 1, 2, 3], [4, 5, 6, 7], [8, 9, 10, 11], [12, 13, 14, 15], 
+        [0, 4, 8, 12], [1, 5, 9, 13], [2, 6, 10, 14], [3, 7, 11, 15], 
+        [0, 5, 10, 15], [3, 6, 9, 12] 
+      ];
+
+      const won = combos.some(combo => combo.every(idx => bingoStateArray[idx]));
+      const banner = document.getElementById('bingo-overlay-win');
+      if (won) {
+        banner.classList.remove('hidden');
+      } else {
+        banner.classList.add('hidden');
+      }
+    }
+
+    function resetBingoGrid() {
+      bingoStateArray = new Array(16).fill(false);
+      bingoStateArray[5] = true; 
+      localStorage.setItem(LOCAL_BINGO_KEY, JSON.stringify(bingoStateArray));
+      renderBingoBoard();
+      document.getElementById('bingo-overlay-win').classList.add('hidden');
+      showToastNotification("Bingo de Vigilancia restablecido.");
+    }
+
+    function checkDilemmaAnswer(choice, element) {
+      const feedback = document.getElementById('dilemma-feedback');
+      feedback.classList.remove('hidden', 'bg-emeraldCustom/10', 'border-emeraldCustom/20', 'text-emeraldCustom', 'bg-red-500/10', 'border-red-500/20', 'text-red-700');
+      
+      const buttons = document.querySelectorAll('#dilemma-options-container button');
+      buttons.forEach(b => {
+        b.classList.remove('border-accent', 'bg-accent/5');
+        b.querySelector('.icon-indicator').textContent = '';
+      });
+
+      element.classList.add('border-accent', 'bg-accent/5');
+
+      if (choice === 'estudio') {
+        feedback.classList.add('bg-emeraldCustom/10', 'border-emeraldCustom/20', 'text-emeraldCustom');
+        feedback.innerHTML = `
+          <strong>Correcto (Soberanía Técnico-Legal):</strong> De acuerdo al marco civil y municipal vigente en el país, la responsabilidad por fallos de diseño o cálculo es intransferible y recae en el profesional habilitado firmante del plano. Las plataformas de IA no poseen personería jurídica ni matrícula profesional. Derivar responsabilidades a un algoritmo se interpreta legalmente como negligencia en el ejercicio técnico.
+        `;
+        element.querySelector('.icon-indicator').textContent = "Seleccionado";
+        showToastNotification("Opción correcta seleccionada.");
+      } else {
+        feedback.classList.add('bg-red-500/10', 'border-red-500/20', 'text-red-700');
+        feedback.innerHTML = `
+          <strong>Incorrecto:</strong> Los tribunales civiles y comerciales no aceptan de ninguna manera el descargo por error del software. La firma en los planos municipales te responsabiliza de manera absoluta e indelegable del comportamiento real de los elementos construidos.
+        `;
+        element.querySelector('.icon-indicator').textContent = "Incorrecto";
+        showToastNotification("Opción incorrecta.");
+      }
+    }
+
+    function saveDilemmaText() {
+      const text = document.getElementById('dilemma-reasoning').value;
+      localStorage.setItem(LOCAL_DILEMMA_KEY, text);
+      const status = document.getElementById('dilemma-status');
+      status.textContent = "Cambios guardados.";
+      setTimeout(() => { status.textContent = ""; }, 3000);
+      showToastNotification("Justificación registrada.");
+    }
+
+    function renderToolsFlipBoard() {
+      const container = document.getElementById('tools-flip-grid');
+      container.innerHTML = '';
+      
+      TOOLS_FLIP_DATA.forEach((tool, index) => {
+        container.innerHTML += `
+          <div class="bg-white border-2 border-slate-200 rounded-3xl p-6 sm:p-8 flex flex-col justify-between min-h-[300px] shadow-sm hover:border-accent transition-all duration-300 relative overflow-hidden group">
+            
+            <div class="space-y-4">
+              <div class="flex justify-between items-start">
+                <span class="text-xs font-mono font-bold text-accent uppercase tracking-wider bg-accent/5 px-2.5 py-1 rounded">Mendoza Taller</span>
+                <span class="text-xs text-textLight font-mono uppercase tracking-widest font-extrabold">Usada</span>
+              </div>
+              <h4 class="text-2xl font-display font-bold text-textDark">${tool.name}</h4>
+              <p class="text-base text-textMedium leading-relaxed">${tool.desc}</p>
+            </div>
+
+            <div class="border-t border-slate-100 pt-5 mt-6 flex justify-between items-center">
+              <a href="${tool.url}" target="_blank" class="inline-flex items-center gap-1.5 text-sm font-bold text-accent hover:underline font-mono">
+                Ir al sitio oficial →
+              </a>
+              <span class="text-xs font-mono text-textLight font-extrabold uppercase">Ecosistema IA</span>
+            </div>
+
+          </div>
+        `;
+      });
+    }
+
+    function switchChecklistType(type) {
+      activeChecklistType = type;
+      
+      const tabEstudiante = document.getElementById('tab-chk-estudiante');
+      const tabProfesional = document.getElementById('tab-chk-profesional');
+      
+      if (type === 'student') {
+        tabEstudiante.className = "px-5 py-3 rounded-t-xl text-sm font-bold uppercase tracking-wider transition-all border-b-4 border-accent text-accent";
+        tabProfesional.className = "px-5 py-3 rounded-t-xl text-sm font-bold uppercase tracking-wider text-textLight hover:text-textDark transition-all border-b-4 border-transparent";
+        document.getElementById('checklist-label-indicator').textContent = "Grado de Auditoría Crítica Académica";
+      } else {
+        tabEstudiante.className = "px-5 py-3 rounded-t-xl text-sm font-bold uppercase tracking-wider text-textLight hover:text-textDark transition-all border-b-4 border-transparent";
+        tabProfesional.className = "px-5 py-3 rounded-t-xl text-sm font-bold uppercase tracking-wider transition-all border-b-4 border-accent text-accent";
+        document.getElementById('checklist-label-indicator').textContent = "Grado de Responsabilidad y Firma Civil";
+      }
+      
+      renderChecklistBoard();
+    }
+
+    function renderChecklistBoard() {
+      const container = document.getElementById('checklist-grid-container');
+      container.innerHTML = '';
+
+      const items = (activeChecklistType === 'student') ? CHECKLIST_STUDENT_ITEMS : CHECKLIST_PROFESSIONAL_ITEMS;
+      const chkArray = (activeChecklistType === 'student') ? studentChecklistArray : professionalChecklistArray;
+
+      items.forEach((item, index) => {
+        const isChecked = chkArray[index];
+        container.innerHTML += `
+          <button onclick="toggleChecklistItem(${index})" class="p-5 rounded-2xl text-left border-2 transition-all duration-300 flex items-start gap-4 w-full shadow-sm ${
+            isChecked 
+              ? 'bg-emeraldCustom/5 border-emeraldCustom text-emeraldCustom shadow-md' 
+              : 'bg-white border-slate-200 text-textMedium hover:border-slate-300 hover:text-textDark'
+          }">
+            <div class="w-6 h-6 rounded border-2 flex items-center justify-center shrink-0 mt-0.5 ${isChecked ? 'bg-emeraldCustom border-emeraldCustom text-white font-black' : 'border-slate-400 bg-white'}">
+              ${isChecked ? '✓' : ''}
+            </div>
+            <span class="text-sm sm:text-base font-medium leading-relaxed">${item}</span>
+          </button>
+        `;
+      });
+      updateChecklistProgressTracker();
+    }
+
+    function toggleChecklistItem(index) {
+      if (activeChecklistType === 'student') {
+        studentChecklistArray[index] = !studentChecklistArray[index];
+        localStorage.setItem(LOCAL_STUDENT_CH_KEY = LOCAL_STUDENT_CHK_KEY, JSON.stringify(studentChecklistArray));
+      } else {
+        professionalChecklistArray[index] = !professionalChecklistArray[index];
+        localStorage.setItem(LOCAL_PRO_CHK_KEY, JSON.stringify(professionalChecklistArray));
+      }
+      renderChecklistBoard();
+    }
+
+    function updateChecklistProgressTracker() {
+      const chkArray = (activeChecklistType === 'student') ? studentChecklistArray : professionalChecklistArray;
+      const count = chkArray.filter(x => x).length;
+      const total = 8;
+      document.getElementById('checklist-text-indicator').textContent = `${count} / ${total} puntos validados`;
+      const pct = (count / total) * 100;
+      document.getElementById('checklist-progress').style.width = `${pct}%`;
+    }
+
+    function renderCommitmentSelectors() {
+      const container = document.getElementById('commitment-selectors-container');
+      container.innerHTML = '';
+
+      COMPROMISOS_PREDEFINIDOS.forEach(item => {
+        container.innerHTML += `
+          <button onclick="appendCommitmentToText('${item.text}')" class="w-full text-left p-4 bg-slate-50 hover:bg-accent/5 border-2 border-slate-200 hover:border-accent rounded-xl transition-all flex flex-col gap-1.5 group shadow-sm">
+            <div class="flex justify-between items-center">
+              <strong class="text-sm font-mono text-textDark group-hover:text-accent transition-colors uppercase tracking-wider">${item.label}</strong>
+              <span class="text-xs text-accent font-black group-hover:translate-x-1 transition-transform">+ Agregar</span>
+            </div>
+            <p class="text-xs sm:text-sm text-textMedium leading-relaxed line-clamp-2">${item.text}</p>
+          </button>
+        `;
+      });
+    }
+
+    function appendCommitmentToText(text) {
+      const textarea = document.getElementById('personal-bitacora-text');
+      const currentValue = textarea.value.trim();
+      
+      if (currentValue.includes(text)) {
+        showToastNotification("Este compromiso ya fue agregado.");
+        return;
+      }
+
+      if (currentValue === "") {
+        textarea.value = `• ${text}`;
+      } else {
+        textarea.value = `${currentValue}\n\n• ${text}`;
+      }
+
+      saveNotesToLocal();
+      showToastNotification("Compromiso agregado a tu bitácora.");
+    }
+
+    function saveNotesToLocal() {
+      const text = document.getElementById('personal-bitacora-text').value;
+      localStorage.setItem(LOCAL_NOTES_KEY, text);
+      const status = document.getElementById('bitacora-save-status');
+      status.textContent = "Bitácora guardada.";
+      setTimeout(() => { status.textContent = ""; }, 3000);
+      showToastNotification("Notas de bitácora actualizadas.");
+    }
+
+    function clearNotesFromLocal() {
+      document.getElementById('personal-bitacora-text').value = "";
+      document.getElementById('dilemma-reasoning').value = "";
+      localStorage.removeItem(LOCAL_NOTES_KEY);
+      localStorage.removeItem(LOCAL_DILEMMA_KEY);
+      showToastNotification("Bitácora restablecida.");
+    }
+
+    function openAxesModal(index) {
+      const modal = document.getElementById('axes-modal');
+      const data = CONCEPTOS[index];
+      
+      document.getElementById('modal-axis-number').textContent = `EJE ${data.num}`;
+      document.getElementById('modal-axis-title').textContent = data.title;
+      document.getElementById('modal-axis-body').innerHTML = data.body;
+
+      modal.classList.remove('hidden');
+    }
+
+    function closeAxesModal() {
+      const modal = document.getElementById('axes-modal');
+      modal.classList.add('hidden');
+    }
+
+    function openModalByKey(key) {
+      const modal = document.getElementById('axes-modal');
+      const item = MODALS[key];
+      if (item) {
+        document.getElementById('modal-axis-number').textContent = item.k;
+        document.getElementById('modal-axis-title').textContent = item.t;
+        document.getElementById('modal-axis-body').innerHTML = item.b;
+        modal.classList.remove('hidden');
+      }
+    }
+
+    function openQrModal() {
+      document.getElementById('qr-modal').classList.remove('hidden');
+    }
+
+    function closeQrModal() {
+      document.getElementById('qr-modal').classList.add('hidden');
+    }
+
+    function showToastNotification(message) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toast-message').textContent = message;
+      
+      toast.classList.remove('translate-y-24', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+
+      setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('translate-y-24', 'opacity-0');
+      }, 3000);
+    }
+
+    function copyPromptText(elementId) {
+      const text = document.getElementById(elementId).innerText;
+      const dummy = document.createElement("textarea");
+      document.body.appendChild(dummy);
+      dummy.value = text;
+      dummy.select();
+      document.execCommand('copy');
+      document.body.removeChild(dummy);
+      showToastNotification("Prompt copiado al portapapeles.");
+    }
+
+    document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+      const menu = document.getElementById('mobile-menu');
+      menu.classList.toggle('hidden');
+    });
+
+    document.querySelectorAll('#mobile-menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.getElementById('mobile-menu').classList.add('hidden');
+      });
+    });
+
+    window.addEventListener('scroll', () => {
+      const documentHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrolled = (window.scrollY / documentHeight) * 100;
+      document.getElementById('scroll-progress').style.width = `${scrolled}%`;
+    });
+  </script>
+</body>
+</html>
